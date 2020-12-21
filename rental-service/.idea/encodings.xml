@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../backoffice-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../backoffice-service/backoffice-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../backoffice-service/backoffice-service-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../backoffice-service/backoffice-service-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../bluetop-framework" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../building-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../building-service/building-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../building-service/building-service-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../building-service/building-service-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../contract-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../contract-service/contract-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../contract-service/contract-service-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../contract-service/contract-service-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../finance-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../finance-service/finance-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../finance-service/finance-service-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../finance-service/finance-service-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../merchant-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../merchant-service/merchant-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../merchant-service/merchant-service-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../merchant-service/merchant-service-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rental-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rental-service-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rental-service-provider" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,22 @@
+spring:
+  config:
+    location: classpath:/env.yml,classpath:/override.yml
+  application:
+    name: building-service
+  cloud:
+    consul:
+      # 将服务注册到consul
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        enabled: true
+        preferIpAddress: true
+        instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+        health-check-path: /health
+        health-check-interval: 1s
+        #backoffice路径注册到Fabio上
+        tags: urlprefix-/building-service
+      config:
+        enabled: true
+        watch.enabled: false
