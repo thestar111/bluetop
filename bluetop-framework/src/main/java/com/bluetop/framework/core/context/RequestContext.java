@@ -9,8 +9,10 @@
  */
 package com.bluetop.framework.core.context;
 
+import lombok.Data;
+
 /**
- * <一句话功能简述>
+ * <请求上下文>
  *
  * @author zhouping
  * @version 1.0
@@ -18,5 +20,55 @@ package com.bluetop.framework.core.context;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
+@Data
 public class RequestContext {
+
+    private static final ThreadLocal<RequestContext> contextTL = new ThreadLocal<>();
+
+    /** 客户端传过来的token */
+    private String accessToken;
+
+    /** Token对象 */
+    private String token;
+
+    /** 请求IP */
+    private String ip, remoteAddr;
+
+    /** 请求ID */
+    private String reqId;
+
+    /** 请求来源 */
+    private String reqSource;
+
+    /**
+     * 获取请求上下文
+     *
+     * @return
+     */
+    public static RequestContext get() {
+        RequestContext ctx = contextTL.get();
+        return ctx == null ? new RequestContext() : ctx;
+    }
+
+    /**
+     * 设置上下文
+     *
+     * @param ctx
+     */
+    public static void set(RequestContext ctx) {
+        if (ctx == null) {
+            contextTL.remove();
+        } else {
+            contextTL.set(ctx);
+        }
+    }
+
+    /**
+     * 清空上下文信息
+     */
+    public static void clear() {
+        if (contextTL != null) {
+            contextTL.remove();
+        }
+    }
 }

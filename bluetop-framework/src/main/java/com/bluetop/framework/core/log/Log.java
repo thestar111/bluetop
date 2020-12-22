@@ -16,7 +16,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * <一句话功能简述>
+ * <日志拦截器>
  *
  * @author zhouping
  * @version 1.0
@@ -34,12 +33,11 @@ import java.util.Arrays;
  */
 @Slf4j
 @Aspect
-@Component
 public class Log {
     /**
      * 定义切入点
      */
-    @Pointcut("@annotation(com.bluetop.framework.core.cons.PrintLog)")
+    @Pointcut("@annotation(com.bluetop.framework.core.annotation.PrintLog)")
     public void point() {
     }
 

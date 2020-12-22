@@ -10,19 +10,19 @@
  */
 package com.bluetop.framework.core.chain;
 
+import com.bluetop.framework.core.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.ThreadContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.bluetop.framework.core.cons.Constans.TRANCE_ID;
+import static com.bluetop.framework.core.context.RequestHeader.X_REQUEST_FROM;
 import static com.bluetop.framework.core.context.RequestHeader.X_REQUEST_ID;
 
 /**
@@ -34,8 +34,6 @@ import static com.bluetop.framework.core.context.RequestHeader.X_REQUEST_ID;
  * @since [产品/模块版本]
  */
 @Slf4j
-@Order(Integer.MAX_VALUE - 9)
-@WebFilter(urlPatterns = {"/api/*", "/*"}, filterName = "RequestLogChainFilter")
 public class RequestLogChainFilter implements Filter
 {
 	
@@ -53,9 +51,15 @@ public class RequestLogChainFilter implements Filter
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String traceID = request.getHeader (X_REQUEST_ID.getName());
+		String source = request.getHeader (X_REQUEST_FROM.getName());
 		ThreadContext.put (TRANCE_ID, traceID);
+		RequestContext context = RequestContext.get();
+		context.setReqId(traceID);
+		context.setReqSource(source);
+		RequestContext.set(context);
 		filterChain.doFilter (request, response);
 		ThreadContext.clearAll ();
+		RequestContext.clear();
 	}
 	
 	@Override

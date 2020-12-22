@@ -11,12 +11,17 @@
 package com.bluetop.framework.core.utils;
 
 import com.bluetop.framework.core.exception.SystemException;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import static com.bluetop.framework.core.cons.IErrorCodeEnum.Param_does_not_correct;
 
@@ -32,35 +37,227 @@ import static com.bluetop.framework.core.cons.IErrorCodeEnum.Param_does_not_corr
 public final class DateUtils {
 
 
-    /**
-     * 东3区时间
-     */
+    /** 默认时区 */
     public static final ZoneId DEFAULT_ZONE = ZoneId.systemDefault();
-
-    /**
-     * 14位
-     */
+    /** 14位 */
     public static final String TIME_PATTERN_FOUR = "yyyyMMddHHmmss";
-
-    /**
-     * 8位
-     */
+    /** 8位 */
     public static final String ISO_TIME_FORMAT = "yyyyMMdd";
-
-    /**
-     * 6位
-     */
+    /** 6位 */
     public static final String TIME_MONTH_FORMAT = "yyyyMM";
-
-    /**
-     * 10位
-     */
+    /** 10位 */
     public static final String TIME_EXPAND_FORMAT = "yyyy-MM-dd";
+    /** 18位 */
+    public static final String TIME_PATTERN_COMMON = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_FORMAT = "yyyy/MM/dd HH:mm:ss";
+    public static final String ISO_CN_FORMAT = "yyyy 年 MM 月 dd 日 ";
+    public static final String ISO_EN_FORMAT = "d MMMMM yyyy";
+    public static final String CUSTOM_FORMAT = "yyyyMM";
+    public static final String ISO_FORMAT = "yyyyMMdd";
+
+
+    public static final ZoneId ShangHai = ZoneId.of("Asia/Shanghai");
 
     /**
-     * 18位
+     * 获取下个月第一天(yyyy-MM-dd 00:00:00)
+     *
+     * @return
      */
-    public static final String TIME_PATTERN_COMMON = "yyyy-MM-dd HH:mm:ss";
+    public static Date getFirstDayOfNextMonth() {
+        LocalDate now = LocalDate.now().plusMonths(1);
+        now = now.with(TemporalAdjusters.firstDayOfMonth());
+        ZonedDateTime zonedDateTime = now.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 获取下个月最后一天(yyyy-MM-dd 00:00:00)
+     *
+     * @return
+     */
+    public static Date getLastDayOfNextMonth() {
+        LocalDate now = LocalDate.now().plusMonths(1);
+        return getLastDayOfMonth(localDate2Date(now));
+    }
+
+    /**
+     * 获取下个月第一天(yyyy-MM-dd 00:00:00)
+     *
+     * @return
+     */
+    public static Date getFirstDayOfNextMonth(Date date) {
+        LocalDate now = date2LocalDate(date).plusMonths(1);
+        now = now.with(TemporalAdjusters.firstDayOfMonth());
+        ZonedDateTime zonedDateTime = now.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 获取下个月最后一天(yyyy-MM-dd 00:00:00)
+     *
+     * @return
+     */
+    public static Date getLastDayOfNextMonth(Date date) {
+        LocalDate now = date2LocalDate(date).plusMonths(1);
+        return getLastDayOfMonth(localDate2Date(now));
+    }
+
+    /**
+     * 获取当月第一天(yyyy-MM-dd 00:00:00)
+     *
+     * @return
+     */
+    public static Date getFirstDayOfMonth() {
+        return getFirstDayOfMonth(new Date());
+    }
+
+    /**
+     * 获取当月最后一天(yyyy-MM-dd 00:00:00)
+     *
+     * @return
+     */
+    public static Date getLastDayOfMonth() {
+        return getLastDayOfMonth(new Date());
+    }
+
+    /**
+     * 获取月初第一天
+     *
+     * @param date
+     * @return
+     */
+    public static Date getFirstDayOfMonth(Date date) {
+        LocalDate localDate = date2LocalDate(date == null ? new Date() : date);
+        localDate = localDate.with(TemporalAdjusters.firstDayOfMonth());
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 获取月末
+     *
+     * @param date
+     * @return
+     */
+    public static Date getLastDayOfMonth(Date date) {
+        LocalDate localDate = date2LocalDate(date == null ? new Date() : date);
+        localDate = localDate.with(TemporalAdjusters.lastDayOfMonth());
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 获取当前时间
+     *
+     * @return
+     */
+    public static Date getCurrentDate() {
+        LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime zdt = now.atZone(ZoneId.systemDefault());
+        return Date.from(zdt.toInstant());
+    }
+
+    /**
+     * 转换Date
+     *
+     * @param date
+     * @return
+     */
+    public static LocalDate date2LocalDate(Date date) {
+        if(null == date) {
+            return null;
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * 将LocalDate转成Date
+     *
+     * @param localDate
+     * @return
+     */
+    public static Date localDate2Date(LocalDate localDate) {
+        if(null == localDate) {
+            return null;
+        }
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 转换Date
+     *
+     * @param date
+     * @return
+     */
+    public static LocalDateTime date2LocalDateTime(Date date) {
+        if(null == date) {
+            return null;
+        }
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /**
+     * 时间加减
+     *
+     * @param date
+     * @param amount
+     * @param unit
+     * @return
+     */
+    public static Date plus(Date date, long amount, ChronoUnit unit) {
+        LocalDate now = date2LocalDate(date == null ? new Date() : date);
+        now = now.plus(amount, unit);
+        ZonedDateTime zonedDateTime = now.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 时间加减
+     *
+     * @param date
+     * @param amount
+     * @param unit
+     * @return
+     */
+    public static Date plusTime(Date date, long amount, ChronoUnit unit) {
+        LocalDateTime now = date2LocalDateTime(date == null ? new Date() : date);
+        now = now.plus(amount, unit);
+        ZonedDateTime zonedDateTime = now.atZone(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date
+     * @param language
+     * @return
+     */
+    public static String formatLanguageDate(Date date, String format, Locale language, ZoneId zoneId) {
+        if (date == null) {
+            return StringUtils.EMPTY;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format, language == null ? Locale.getDefault() : language);
+        sdf.setTimeZone(TimeZone.getTimeZone(zoneId == null ? ShangHai : zoneId));
+        return sdf.format(date);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date
+     * @param format
+     * @return
+     */
+    public static String formatDate(Date date, String format, ZoneId zoneId) {
+        if (date == null) {
+            return StringUtils.EMPTY;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        sdf.setTimeZone(TimeZone.getTimeZone(zoneId == null ? ShangHai : zoneId));
+        return sdf.format(date);
+    }
 
     /**
      * 获取特定时间格式的当前时间

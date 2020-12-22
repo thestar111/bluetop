@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
-@FeignClient(name = "backoffice.service:backoffice-service", url = "url.backoffice-service:")
+@FeignClient(name = "${backoffice.service:backoffice-service}", url = "{url.backoffice-service:}")
 public interface DemoServiceFacade {
 
     /**

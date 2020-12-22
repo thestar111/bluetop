@@ -7,7 +7,7 @@
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package com.bluetop.framework.core.cons;
+package com.bluetop.framework.core.annotation;
 
 import java.lang.annotation.*;
 

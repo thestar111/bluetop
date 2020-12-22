@@ -10,11 +10,10 @@
 package com.bluetop.backoffice.provider.controller;
 
 import com.bluetop.backoffice.api.facade.demo.DemoServiceFacade;
-import com.bluetop.framework.core.cons.PrintLog;
+import com.bluetop.contract.api.facade.demo.ContractDemoFacade;
+import com.bluetop.framework.core.annotation.PrintLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,13 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
-@Configuration
 @RestController
 public class DemoController implements DemoServiceFacade {
 
-    @Autowired
     @Value("${backoffice.service}")
     private String applicationName;
+
+    @Autowired
+    private ContractDemoFacade contractDemoFacade;
 
     /**
      * 示例API
@@ -42,9 +42,10 @@ public class DemoController implements DemoServiceFacade {
      * @param name
      * @return
      */
-    @PostMapping("/say")
     @PrintLog
+    @PostMapping("/say")
     public String sayHello(@RequestParam("name") String name) {
+        contractDemoFacade.sayHello(name);
         return "Hi " + applicationName;
     }
 }

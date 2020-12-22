@@ -23,6 +23,8 @@ import lombok.Getter;
 @Getter
 public enum RequestHeader {
     X_REQUEST_ID("X-Request-ID"),
+    X_REQUEST_FROM("X-Request-From"),
+    X_CUSTOMER_IP("X-Customer-Ip"),
     X_APPLICATION_CONTEXT("X-Application-Context"),
     X_VIA("lantuo-via");
 
