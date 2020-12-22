@@ -35,7 +35,7 @@ public class ApplicationConfiguration {
     @Bean
     public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
         log.info("[ApplicationConfiguration] bootstrap application : {} instanceid : {}", applicationName, instanceId);
-        return new ServletRegistrationBean(dispatcherServlet, String.format("/%s/api/*", applicationName), "/prometheus", "/health");
+        return new ServletRegistrationBean(dispatcherServlet, String.format("/%s/api/*", applicationName), "/prometheus", "/actuator/health");
     }
 
     /**

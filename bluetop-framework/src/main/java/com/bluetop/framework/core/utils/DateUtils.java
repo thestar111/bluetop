@@ -11,7 +11,7 @@
 package com.bluetop.framework.core.utils;
 
 import com.bluetop.framework.core.exception.SystemException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.text.SimpleDateFormat;

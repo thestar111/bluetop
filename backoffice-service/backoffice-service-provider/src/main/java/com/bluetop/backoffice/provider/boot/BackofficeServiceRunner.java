@@ -28,12 +28,12 @@ import org.springframework.context.annotation.Import;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
-//@EnableLog
-//@EnableRequestTrance
+@EnableLog
+@EnableRequestTrance
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(basePackages = "com.bluetop.backoffice")
-//@Import(ApplicationConfiguration.class)
+@Import(ApplicationConfiguration.class)
 @EnableFeignClients(basePackages = {"com.bluetop.contract.api.facade.demo"})
 public class BackofficeServiceRunner {
 

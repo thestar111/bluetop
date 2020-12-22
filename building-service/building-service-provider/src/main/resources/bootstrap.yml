@@ -13,7 +13,6 @@ spring:
         enabled: true
         preferIpAddress: true
         instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
-        health-check-path: /health
         health-check-interval: 1s
         #backoffice路径注册到Fabio上
         tags: urlprefix-/building-service

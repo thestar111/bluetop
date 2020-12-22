@@ -14,8 +14,7 @@ import com.bluetop.framework.core.cons.Result;
 import com.bluetop.framework.core.exception.BusinessException;
 import com.bluetop.framework.core.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.http.MethodNotSupportedException;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -82,20 +81,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodNotFoundException.class)
     @ResponseBody
     public Result<String> illegalPropExceptionHandler(HttpServletRequest request, MethodNotFoundException e) throws Exception {
-        return handleErrorInfo(request, e);
-    }
-
-    /**
-     *
-     * @param request
-     * @param e
-     * @return
-     * @throws Exception
-     */
-    @ResponseStatus(HttpStatus.METHOD_FAILURE)
-    @ExceptionHandler(MethodNotSupportedException.class)
-    @ResponseBody
-    public Result<String> illegalPropExceptionHandler(HttpServletRequest request, MethodNotSupportedException e) throws Exception {
         return handleErrorInfo(request, e);
     }
 
