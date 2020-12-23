@@ -22,6 +22,6 @@ public interface ContractDemoFacade {
      * @param name
      * @return
      */
-    @PostMapping(value = "/say")
+    @PostMapping(value = "/contract-service/api/say")
     String sayHello(@RequestParam("name") String name);
 }

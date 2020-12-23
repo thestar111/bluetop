@@ -10,6 +10,7 @@
     <version>1.0.0</version>
 
     <name>merchant-service</name>
+    <description>商户会员服务</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

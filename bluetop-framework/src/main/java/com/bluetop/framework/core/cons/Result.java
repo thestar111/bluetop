@@ -38,6 +38,9 @@ public class Result<T> implements Serializable {
     /** 返回数据信息 */
     private T data;
 
+    /** 错误信息 */
+    private Error error;
+
     /** 是否成功 */
     private boolean success = true;
 }

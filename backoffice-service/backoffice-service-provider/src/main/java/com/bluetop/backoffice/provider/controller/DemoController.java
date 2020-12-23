@@ -12,6 +12,7 @@ package com.bluetop.backoffice.provider.controller;
 import com.bluetop.backoffice.api.facade.demo.DemoServiceFacade;
 import com.bluetop.contract.api.facade.demo.ContractDemoFacade;
 import com.bluetop.framework.core.annotation.PrintLog;
+import com.bluetop.framework.core.cons.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,8 +45,11 @@ public class DemoController implements DemoServiceFacade {
      */
     @PrintLog
     @PostMapping("/say")
-    public String sayHello(@RequestParam("name") String name) {
-        contractDemoFacade.sayHello(name);
-        return "Hi " + applicationName;
+    public Result<String> sayHello(@RequestParam("name") String name) {
+        //contractDemoFacade.sayHello(name);
+        Result<String> result = new Result<>();
+        result.setData("Hi " + applicationName);
+        result.setData("SUCCESS");
+        return result;
     }
 }

@@ -10,6 +10,7 @@
     <version>1.0.0</version>
 
     <name>rental-service</name>
+    <description>商业租赁服务</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

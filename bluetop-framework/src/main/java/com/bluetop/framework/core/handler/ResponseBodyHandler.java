@@ -35,7 +35,7 @@ import static com.bluetop.framework.core.context.RequestHeader.*;
 public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
     /** 系统应用名 */
-    @Value("spring.application.name:")
+    @Value("${spring.application.name:}")
     private String applicationName;
 
     /**
@@ -65,7 +65,7 @@ public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         serverHttpResponse.getHeaders().add(X_REQUEST_ID.getName(), ThreadContext.get(TRANCE_ID));
         serverHttpResponse.getHeaders().add(X_APPLICATION_CONTEXT.getName(), applicationName);
-        serverHttpResponse.getHeaders().add(X_VIA.getName(), "lantuo-via");
+        serverHttpResponse.getHeaders().add(X_VIA.name(), X_VIA.getName());
         return body;
     }
 }

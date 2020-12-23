@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>finance-service</name>
+    <description>财务服务</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

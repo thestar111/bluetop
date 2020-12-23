@@ -10,6 +10,7 @@
     <version>1.0.0</version>
 
     <name>building-service</name>
+    <description>楼宇信息服务</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

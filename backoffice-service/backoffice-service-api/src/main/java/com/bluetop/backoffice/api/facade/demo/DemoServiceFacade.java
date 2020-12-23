@@ -9,6 +9,7 @@
  */
 package com.bluetop.backoffice.api.facade.demo;
 
+import com.bluetop.framework.core.cons.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,5 +33,5 @@ public interface DemoServiceFacade {
      * @return
      */
     @PostMapping(value = "/say")
-    String sayHello(@RequestParam("name") String name);
+    Result<String> sayHello(@RequestParam("name") String name);
 }

@@ -1,6 +1,8 @@
 package com.bluetop.framework.core.configuration;
 
 import com.bluetop.framework.core.chain.RequestLogChainFilter;
+import com.bluetop.framework.core.handler.ResponseBodyHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,13 +19,31 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RequestTranceConfiguration {
 
+    @Value("${spring.application.name:}")
+    private String applicationName;
+
+    /**
+     * 添加拦截
+     *
+     * @return
+     */
     @Bean
     public FilterRegistrationBean requestTrance() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new RequestLogChainFilter());
-        registration.addUrlPatterns("/api/*");
+        registration.addUrlPatterns(String.format("/%s/api/*", applicationName));
         registration.setName("RequestLogChainFilter");
         registration.setOrder(FilterRegistrationBean.LOWEST_PRECEDENCE);
         return registration;
+    }
+
+    /**
+     * 返回消息统一处理
+     *
+     * @return
+     */
+    @Bean
+    public ResponseBodyHandler responseBodyHandler() {
+        return new ResponseBodyHandler();
     }
 }
