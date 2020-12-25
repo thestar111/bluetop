@@ -7,7 +7,7 @@
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package com.bluetop.contract.boot;
+package com.bluetop.contract.provider.boot;
 
 import com.bluetop.framework.core.bind.EnableLog;
 import com.bluetop.framework.core.bind.EnableRequestTrance;

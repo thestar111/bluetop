@@ -1,4 +1,4 @@
-package com.bluetop.contract.controller;
+package com.bluetop.contract.provider.controller;
 
 import com.bluetop.contract.api.facade.demo.ContractDemoFacade;
 import com.bluetop.framework.core.annotation.PrintLog;

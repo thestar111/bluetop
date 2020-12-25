@@ -1,13 +1,13 @@
 /**
- * 文 件 名:  FinanceServiceRunner
+ * 文 件 名:  MerchantServiceRunner
  * 描    述:  <描述>
  * 修 改 人:  zhouping
- * 修改时间:  22:07
+ * 修改时间:  21:47
  * 跟踪单号:  <跟踪单号>
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package com.bluetop.finance.boot;
+package com.bluetop.merchant.provider.boot;
 
 import com.bluetop.framework.core.bind.EnableLog;
 import com.bluetop.framework.core.bind.EnableRequestTrance;
@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Import;
  *
  * @author zhouping
  * @version 1.0
- * @date 2020/12/21 22:07
+ * @date 2020/12/21 21:47
  * @see [相关类/方法]
  * @since JDK 1.8
  */
@@ -32,10 +32,9 @@ import org.springframework.context.annotation.Import;
 @Import(ApplicationConfiguration.class)
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = "com.bluetop.finance")
-public class FinanceServiceRunner {
-
+@ComponentScan(basePackages = "com.bluetop.merchant")
+public class MerchantServiceRunner {
     public static void main(String[] args) {
-        SpringApplication.run(FinanceServiceRunner.class, args);
+        SpringApplication.run(MerchantServiceRunner.class, args);
     }
 }

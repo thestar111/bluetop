@@ -1,13 +1,13 @@
 /**
- * 文 件 名:  RentalServiceRunner
+ * 文 件 名:  FinanceServiceRunner
  * 描    述:  <描述>
  * 修 改 人:  zhouping
- * 修改时间:  21:52
+ * 修改时间:  22:07
  * 跟踪单号:  <跟踪单号>
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package com.bluetop.rent.boot;
+package com.bluetop.finance.provider.boot;
 
 import com.bluetop.framework.core.bind.EnableLog;
 import com.bluetop.framework.core.bind.EnableRequestTrance;
@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Import;
  *
  * @author zhouping
  * @version 1.0
- * @date 2020/12/21 21:52
+ * @date 2020/12/21 22:07
  * @see [相关类/方法]
  * @since JDK 1.8
  */
@@ -32,9 +32,10 @@ import org.springframework.context.annotation.Import;
 @Import(ApplicationConfiguration.class)
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = "com.bluetop.rent")
-public class RentalServiceRunner {
+@ComponentScan(basePackages = "com.bluetop.finance")
+public class FinanceServiceRunner {
+
     public static void main(String[] args) {
-        SpringApplication.run(RentalServiceRunner.class, args);
+        SpringApplication.run(FinanceServiceRunner.class, args);
     }
 }

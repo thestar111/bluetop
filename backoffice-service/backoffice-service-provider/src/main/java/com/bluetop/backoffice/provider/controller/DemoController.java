@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController implements DemoServiceFacade {
 
-    @Value("${backoffice.service}")
+    @Value("${backoffice.service:}")
     private String applicationName;
 
     @Autowired

@@ -16,8 +16,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
-        <mybatis.version>3.4.6</mybatis.version>
-        <mybatis.spring.version>1.3.2</mybatis.spring.version>
+        <mybatis.version>2.1.1</mybatis.version>
         <guava.version>19.0</guava.version>
         <lombok.version>1.16.18</lombok.version>
         <hutool.version>4.5.1</hutool.version>
@@ -60,6 +59,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- logback日志框架 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -78,6 +78,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <!--Consul配置中心-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-consul-config</artifactId>
@@ -108,16 +109,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--数据库包-->
+            <!-- mybaits -->
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
+            <!-- mysql 数据库驱动. -->
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis.spring.version}</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <scope>runtime</scope>
             </dependency>
             <!--工具包-->
             <dependency>
@@ -139,6 +141,22 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+            <!--监控数据-->
+            <!--micrometer核心包 桥接Prometheus-->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-spring-legacy</artifactId>
+            </dependency>
+            <!--micrometer核心包 获取jvm相关信息 用于展示Grafana上-->
+            <!--<dependency>
+                <groupId>io.github.mweirauch</groupId>
+                <artifactId>micrometer-jvm-extras</artifactId>
+                <version>0.1.4</version>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -180,4 +198,14 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <build>
+        <plugins>
+            <!-- 打包上传提交人信息 -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
