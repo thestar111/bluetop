@@ -17,7 +17,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
         <mybatis.version>2.1.1</mybatis.version>
-        <guava.version>19.0</guava.version>
+        <guava.version>23.0</guava.version>
         <lombok.version>1.16.18</lombok.version>
         <hutool.version>4.5.1</hutool.version>
         <commons-lang3.version>3.9</commons-lang3.version>
@@ -78,15 +78,15 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <!--Consul配置中心-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-consul-config</artifactId>
-        </dependency>
         <!-- 健康检查 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--Consul配置中心-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-consul-config</artifactId>
         </dependency>
         <!-- Spring Cloud Consul 依赖引入 -->
         <dependency>
@@ -96,6 +96,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--监控数据-->
+        <!--micrometer核心包 桥接Prometheus-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <!--micrometer核心包 获取jvm相关信息 用于展示Grafana上-->
+        <dependency>
+            <groupId>io.github.mweirauch</groupId>
+            <artifactId>micrometer-jvm-extras</artifactId>
+            <version>0.1.4</version>
         </dependency>
     </dependencies>
 
@@ -141,22 +153,6 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
-            <!--监控数据-->
-            <!--micrometer核心包 桥接Prometheus-->
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-registry-prometheus</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-spring-legacy</artifactId>
-            </dependency>
-            <!--micrometer核心包 获取jvm相关信息 用于展示Grafana上-->
-            <!--<dependency>
-                <groupId>io.github.mweirauch</groupId>
-                <artifactId>micrometer-jvm-extras</artifactId>
-                <version>0.1.4</version>
-            </dependency>-->
         </dependencies>
     </dependencyManagement>
 

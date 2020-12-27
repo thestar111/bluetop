@@ -1,2 +1,9 @@
 server:
   port: 7002
+bluetop:
+  swagger:
+    enabled: true
+    title: 合同服务接口
+    description: 合同服务接口文档
+    version: 1.0
+    base-package: com.bluetop.contract.provider.controller

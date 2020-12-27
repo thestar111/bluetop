@@ -12,6 +12,7 @@ package com.bluetop.backoffice.provider.boot;
 import com.bluetop.framework.core.bind.EnableLog;
 import com.bluetop.framework.core.bind.EnableRequestTrance;
 import com.bluetop.framework.core.configuration.ApplicationConfiguration;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -35,6 +36,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan(basePackages = "com.bluetop.backoffice")
 @Import(ApplicationConfiguration.class)
 @EnableFeignClients(basePackages = {"com.bluetop.contract.api.facade.demo"})
+@MapperScan(basePackages = {"com.bluetop.backoffice.data.mapper"})
 public class BackofficeServiceRunner {
 
     public static void main(String[] args) {

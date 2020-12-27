@@ -19,6 +19,7 @@
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
         <bluetop-framework.version>1.0.0</bluetop-framework.version>
         <mybatis.version>2.1.1</mybatis.version>
+        <swagger.version>1.0.0</swagger.version>
     </properties>
 
     <!--导入Spring Boot 版本-->
@@ -48,6 +49,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.bluetop</groupId>
+            <artifactId>bluetop-swagger-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -58,6 +63,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.bluetop</groupId>
+                <artifactId>bluetop-swagger-starter</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

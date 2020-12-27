@@ -1,0 +1,25 @@
+server:
+  port: 7000
+spring:
+  cloud:
+    gateway:
+      locator:
+        # 开启从注册中心动态创建路由的功能
+        enabled: true
+        # 使用小写服务名，默认是大写
+        lower-case-service-id: true
+      routes:
+        - id: backoffice-service
+          # uri 代表路由的目标地址。注意：uri地址后面不要加 " / "
+          # 消息必须使用http进行转发，lb代表从注册中心获取服务
+          uri: lb://backoffice-service
+          predicates:
+            - Path=/backoffice-service/api/**
+          filters:
+            - AddRequestHeader=X-Request-ID, 22133432432
+        - id: contract-service
+          uri: lb://contract-service
+          predicates:
+            - Path=/contract-service/api/**
+          filters:
+           - AddRequestHeader=X-Request-ID, 22133432432

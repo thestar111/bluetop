@@ -10,14 +10,22 @@
 package com.bluetop.backoffice.provider.controller;
 
 import com.bluetop.backoffice.api.facade.demo.DemoServiceFacade;
+import com.bluetop.backoffice.data.entity.Config;
+import com.bluetop.backoffice.data.mapper.ConfigMapper;
 import com.bluetop.contract.api.facade.demo.ContractDemoFacade;
 import com.bluetop.framework.core.annotation.PrintLog;
 import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.utils.JsonUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <示例API>
@@ -28,11 +36,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
+@Slf4j
+@Api(tags = "示例APi")
 @RestController
 public class DemoController implements DemoServiceFacade {
 
     @Value("${backoffice.service:}")
     private String applicationName;
+
+    @Autowired
+    private ConfigMapper configMapper;
 
     @Autowired
     private ContractDemoFacade contractDemoFacade;
@@ -44,12 +57,12 @@ public class DemoController implements DemoServiceFacade {
      * @return
      */
     @PrintLog
+    @ApiOperation("示例AIP接口")
     @PostMapping("/say")
     public Result<String> sayHello(@RequestParam("name") String name) {
-        //contractDemoFacade.sayHello(name);
+        List<Config> configs = configMapper.getAll();
         Result<String> result = new Result<>();
-        result.setData("Hi " + applicationName);
-        result.setData("SUCCESS");
+        result.setData(JsonUtils.toJson(configs));
         return result;
     }
 }

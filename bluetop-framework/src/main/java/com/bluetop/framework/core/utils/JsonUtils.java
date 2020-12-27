@@ -31,9 +31,7 @@ import java.util.Map;
  */
 public final class JsonUtils {
 
-    /**
-     * JsonMapper
-     */
+    /** Object Mapper */
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {

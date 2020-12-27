@@ -4,6 +4,7 @@ import com.bluetop.framework.core.handler.GlobalExceptionHandler;
 import com.bluetop.framework.core.interceptor.RequestHeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -36,7 +37,7 @@ public class ApplicationConfiguration {
     public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
         log.info("[ApplicationConfiguration] bootstrap application : {} instanceid : {}", applicationName, instanceId);
         return new ServletRegistrationBean(dispatcherServlet, String.format("/%s/api/*", applicationName),
-                "/actuator/prometheus", "/prometheus", "/actuator/health");
+                "/actuator/prometheus", "/actuator/health", "/v2/api-docs", "/*");
     }
 
     /**
@@ -57,5 +58,15 @@ public class ApplicationConfiguration {
     @Bean
     public RequestHeaderInterceptor requestHeaderInterceptor() {
         return new RequestHeaderInterceptor();
+    }
+
+    /**
+     * 监控信息收集
+     *
+     * @return
+     */
+    @Bean
+    public MeterRegistryCustomizer<?> meterRegistryCustomizer() {
+        return meterRegistry -> meterRegistry.config().commonTags("application", applicationName, "instanceId", instanceId);
     }
 }
