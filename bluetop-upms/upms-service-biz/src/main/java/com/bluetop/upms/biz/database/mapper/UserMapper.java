@@ -2,6 +2,7 @@ package com.bluetop.upms.biz.database.mapper;
 
 import com.bluetop.upms.biz.database.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <用户Mapper>
@@ -15,6 +16,43 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    User getUserByUserName(String name);
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @return
+     */
+    int add(User user);
 
+    /**
+     * 修改用户
+     *
+     * @param user
+     * @return
+     */
+    int modify(User user);
+
+    /**
+     * 删除用户
+     *
+     * @param userId
+     * @return
+     */
+    int delete(@Param("userId") Integer userId);
+
+    /**
+     * 根据用户Id查询
+     *
+     * @param userId
+     * @return
+     */
+    User queryById(@Param("userId") Integer userId);
+
+    /**
+     * 根据用户名称查询
+     *
+     * @param name
+     * @return
+     */
+    User getUserByUserName(@Param("name") String name);
 }

@@ -62,7 +62,7 @@ public class RoleController implements RoleServiceFacade {
         String userName = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
         User user = userMapper.getUserByUserName(userName);
-        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
+        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
         if (CollectionUtil.isNotEmpty(roles)) {
             List<RoleVO> roleVOS = Lists.newArrayList();
             roles.stream().forEach(role -> {
@@ -96,7 +96,7 @@ public class RoleController implements RoleServiceFacade {
         String userName = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
         User user = userMapper.getUserByUserName(userName);
-        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
+        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
         resultInfo.setData(roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE));
         return resultInfo;
     }
@@ -125,7 +125,7 @@ public class RoleController implements RoleServiceFacade {
         String userName = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
         User user = userMapper.getUserByUserName(userName);
-        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
+        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
         JudgeRole judgeRole = new JudgeRole();
         judgeRole.setJudgeRoleKey(roleKey);
         judgeRole.setOwn(roleService.hasRole(roles, roleKey));

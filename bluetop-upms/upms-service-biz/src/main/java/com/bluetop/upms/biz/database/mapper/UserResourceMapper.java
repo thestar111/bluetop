@@ -1,6 +1,11 @@
 package com.bluetop.upms.biz.database.mapper;
 
+import com.bluetop.upms.biz.database.entity.Application;
+import com.bluetop.upms.biz.database.entity.UserResource;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <用户权限Mapper>
@@ -13,5 +18,27 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserResourceMapper {
+    /**
+     * 添加用户权限信息
+     *
+     * @param userResource
+     * @return
+     */
+    int add(UserResource userResource);
 
+    /**
+     * 查询用户权限信息
+     *
+     * @param userId
+     * @return
+     */
+    List<UserResource> listAll(Integer userId);
+
+    /**
+     * 根据用户ID删除权限信息
+     *
+     * @param userId
+     * @return
+     */
+    int deleteByUser(Integer userId);
 }

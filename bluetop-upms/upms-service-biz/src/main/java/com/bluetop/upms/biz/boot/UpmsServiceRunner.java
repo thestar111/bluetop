@@ -1,5 +1,6 @@
 package com.bluetop.upms.biz.boot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "com.bluetop.upms")
+@MapperScan(basePackages = {"com.bluetop.upms.biz.database.mapper"})
 public class UpmsServiceRunner {
 
     public static void main(String[] args) {

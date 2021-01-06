@@ -47,6 +47,7 @@ public class AuthController implements AuthServiceFacade {
     private ResourceMapper resourceMapper;
     @Autowired
     private ApplicationMapper applicationMapper;
+
     @Value("${jwt.token.active.time:300000}")
     private long activeTime = 5 * 60 * 1000;
 
@@ -60,20 +61,20 @@ public class AuthController implements AuthServiceFacade {
     @ApiOperation(value = "获取token")
     public Result<String> getToken(@RequestBody AuthTokenParams authTokenParms) {
         Result<String> result = new Result<>();
-        if (Objects.nonNull(authTokenParms) && StringUtils.isNoneBlank(authTokenParms.getApplicationKey())
-                && StringUtils.isNoneBlank(authTokenParms.getUserName())
+        if (Objects.nonNull(authTokenParms) && StringUtils.isNoneBlank(authTokenParms.getKey())
+                && StringUtils.isNoneBlank(authTokenParms.getName())
                 && StringUtils.isNoneBlank(authTokenParms.getPassword())) {
-            User user = userMapper.getUserByUserName(authTokenParms.getUserName());
+            User user = userMapper.getUserByUserName(authTokenParms.getName());
             if (Objects.isNull(user)) {
                 throw new AuthException("User doesn't existed!", 101);
             }
-            Application application = applicationMapper.getApplicationByAppkey(authTokenParms.getApplicationKey());
+            Application application = applicationMapper.getApplicationByAppkey(authTokenParms.getKey());
             if (Objects.isNull(application)) {
-                throw new AuthException("Application " + authTokenParms.getApplicationKey() + " doesn't exist!", 120);
+                throw new AuthException("Application " + authTokenParms.getKey() + " doesn't exist!", 120);
             }
             if (authTokenParms.getPassword().equals(user.getPassword())) {
                 try {
-                    result.setData(JWTUtil.sign(user.getUsername(), user.getSecret(), authTokenParms.getApplicationKey(), activeTime));
+                    result.setData(JWTUtil.sign(user.getUsername(), user.getSecret(), authTokenParms.getKey(), activeTime));
                 } catch (UnsupportedEncodingException e) {
                     log.error("Method getToken occur an UnsupportedEncodingException!", e);
                     throw new AuthException("Params invalid!", 504);
@@ -131,10 +132,11 @@ public class AuthController implements AuthServiceFacade {
         String username = JWTUtil.getUsername(token);
         User user = userMapper.getUserByUserName(username);
         List<Resource> resourceList = null;
+        Application application = applicationMapper.getApplicationByAppkey(applicationKey);
         if (SecurityUtils.getSubject().hasRole(Config.SUPER_ADMIN_ROLE)) {
-            resourceList = resourceMapper.getResourcesByAppKey(applicationKey);
+            resourceList = resourceMapper.queryByApplicationId(application.getId());
         } else {
-            resourceList = resourceMapper.getResourcesByUserAndAppKey(user.getId(), applicationKey);
+            resourceList = resourceMapper.queryByApplicationId(application.getId());
         }
         if (CollectionUtil.isNotEmpty(resourceList)) {
             List<ResourceVO> resourceVOS = Lists.newArrayListWithCapacity(resourceList.size());

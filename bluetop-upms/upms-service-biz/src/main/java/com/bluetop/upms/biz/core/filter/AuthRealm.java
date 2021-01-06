@@ -32,7 +32,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * <一句话功能描述>
+ * <用户授权Realm>
  *
  * @author zhouping
  * @version 1.0
@@ -78,12 +78,13 @@ public class AuthRealm extends AuthorizingRealm {
         if (user == null) {
             throw new AuthenticationException("User doesn't exist!");
         }
-        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
+        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
         List<Resource> resources = null;
+        Application application = applicationMapper.getApplicationByAppkey(applicationKey);
         if (roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE)) {
-            resources = resourceMapper.getResourcesByAppKey(applicationKey);
+            resources = resourceMapper.queryByApplicationId(application.getId());
         } else {
-            resources = resourceMapper.getResourcesByUserAndAppKey(user.getId(), applicationKey);
+            resources = resourceMapper.queryByApplicationId(application.getId());
         }
         return buildSimpleAuthorizationInfo(roles, resources);
     }

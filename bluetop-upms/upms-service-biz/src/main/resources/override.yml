@@ -1,0 +1,33 @@
+server:
+  port: 7009
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/upms?useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: zhouping
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 50
+      idle-timeout: 30000
+      max-lifetime: 1200000
+# 数据库配置
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.bluetop.upms.biz.database.entity
+  configuration:
+    # 开启驼峰转换功能
+    map-underscore-to-camel-case: true
+    # 打印sql, 方便调试
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    use-generated-keys: true
+    default-statement-timeout: 60
+    default-fetch-size: 100
+#bluetop:
+#  swagger:
+#    enabled: true
+#    title: 用户基础权限系统
+#    description: 用户基础权限系统接口文档
+#    version: 1.0
+#    base-package: com.bluetop.upms.biz.provider

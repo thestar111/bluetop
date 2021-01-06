@@ -3,6 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bluetop.upms.biz.database.mapper.RoleResourceMapper">
 
+    <insert id="add" parameterType="RoleResource">
+        insert into upms_role_resource(role_id, resource_id, create_user_id, update_user_id)
+        values (#{roleId}, #{resourceId}, #{createUserId}, #{updateUserId})
+    </insert>
 
+    <delete id="deleteById" parameterType="Integer">
+        delete from upms_role_resource where id = #{id}
+    </delete>
 
+    <delete id="deleteByRoleId" parameterType="Integer">
+        delete from upms_role_resource where role_id = #{roleId}
+    </delete>
+
+    <select id="queryByRoleId" parameterType="Integer">
+        select * from upms_role_resource where role_id = #{roleId}
+    </select>
 </mapper>

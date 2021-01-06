@@ -2,6 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bluetop.upms.biz.database.mapper.ResourceMapper">
-    
+
+    <sql id="BASIC_COL">
+        id, parent_id, application_id, name, code, url, description, type, icon, order, status, create_user_id, update_user_id
+    </sql>
+
+    <insert id="add" parameterType="Resource">
+        insert into upms_resource(<include refid="BASIC_COL"/>)
+        values (#{id}, #{parentId}, #{applicationId}, #{name}, #{code}, #{url}, #{description}, #{type}, #{icon}, #{order}, #{status}, #{createUserId}, #{updateUserId})
+    </insert>
+
+    <update id="modify" parameterType="Resource">
+        update upms_resource
+        <set>
+            <if test="parentId != null and parentId != ''">
+                parent_id = #{parentId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="applicationId != null and applicationId != ''">
+                application_id = #{applicationId},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="order != null and order != ''">
+                order = #{order},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from upms_resource where id = #{resourceId}
+    </delete>
+
+    <select id="queryByApplicationId" parameterType="Integer" resultType="Resource">
+        select * from  upms_resource where application_id = #{applicationId}
+    </select>
+
+    <update id="modifyStatus">
+        update upms_resource set status = #{status} where id = #{id}
+    </update>
+
+    <select id="queryById" parameterType="Integer" resultType="Resource">
+        select * from  upms_resource where id = #{id}
+    </select>
 
 </mapper>

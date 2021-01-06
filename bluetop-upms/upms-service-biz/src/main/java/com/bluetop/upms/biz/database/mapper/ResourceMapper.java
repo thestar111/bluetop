@@ -19,19 +19,43 @@ import java.util.List;
 public interface ResourceMapper {
 
     /**
-     * 根据用户及项目key查询当前用户拥有的资源
+     * 添加权限
      *
-     * @param userId         用户id
-     * @param applicationKey 项目key
+     * @param resource
      * @return
      */
-    List<Resource> getResourcesByUserAndAppKey(@Param("userId") Integer userId, @Param("applicationKey") String applicationKey);
+    int add(Resource resource);
 
     /**
-     * 获取当前项目所有资源
+     * 修改权限
      *
-     * @param applicationKey
+     * @param resource
      * @return
      */
-    List<Resource> getResourcesByAppKey(@Param("applicationKey") String applicationKey);
+    int modify(Resource resource);
+
+    /**
+     * 根据应用ID查询
+     *
+     * @param applicationId
+     * @return
+     */
+    List<Resource> queryByApplicationId(@Param("applicationId") Integer applicationId);
+
+    /**
+     * 删除权限
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    int modifyStatus(@Param("status") Integer status, @Param("id") Integer id);
+
+    /**
+     * 根据应用ID查询
+     *
+     * @param id
+     * @return
+     */
+    int queryById(@Param("id") Integer id);
 }
