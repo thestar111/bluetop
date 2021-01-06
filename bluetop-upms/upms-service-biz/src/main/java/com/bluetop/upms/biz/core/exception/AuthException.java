@@ -1,4 +1,4 @@
-package com.bluetop.upms.biz.core;
+package com.bluetop.upms.biz.core.exception;
 
 import com.bluetop.framework.core.cons.IErrorCodeEnum;
 import com.bluetop.framework.core.exception.SystemException;

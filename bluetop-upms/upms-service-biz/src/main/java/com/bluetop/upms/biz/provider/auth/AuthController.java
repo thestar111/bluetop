@@ -7,7 +7,7 @@ import com.bluetop.upms.api.dto.auth.JudgePerMissionparams;
 import com.bluetop.upms.api.facade.AuthServiceFacade;
 import com.bluetop.upms.api.vo.ResourceVO;
 import com.bluetop.upms.biz.cons.Config;
-import com.bluetop.upms.biz.core.AuthException;
+import com.bluetop.upms.biz.core.exception.AuthException;
 import com.bluetop.upms.biz.database.entity.Application;
 import com.bluetop.upms.biz.database.entity.Resource;
 import com.bluetop.upms.biz.database.entity.User;

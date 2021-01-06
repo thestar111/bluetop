@@ -7,7 +7,7 @@ import com.bluetop.upms.api.facade.RoleServiceFacade;
 import com.bluetop.upms.api.vo.JudgeRole;
 import com.bluetop.upms.api.vo.RoleVO;
 import com.bluetop.upms.biz.cons.Config;
-import com.bluetop.upms.biz.core.AuthException;
+import com.bluetop.upms.biz.core.exception.AuthException;
 import com.bluetop.upms.biz.database.entity.Role;
 import com.bluetop.upms.biz.database.entity.User;
 import com.bluetop.upms.biz.database.mapper.RoleMapper;
@@ -15,8 +15,6 @@ import com.bluetop.upms.biz.database.mapper.UserMapper;
 import com.bluetop.upms.biz.utils.JWTUtil;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -38,9 +36,10 @@ public class RoleController implements RoleServiceFacade {
 
     @Autowired
     private RoleMapper roleMapper;
-
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 获取当前用户拥有的角色
@@ -98,7 +97,7 @@ public class RoleController implements RoleServiceFacade {
         String applicationKey = JWTUtil.getApplicationKey(token);
         User user = userMapper.getUserByUserName(userName);
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
-        resultInfo.setData(hasRole(roles, Config.SUPER_ADMIN_ROLE));
+        resultInfo.setData(roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE));
         return resultInfo;
     }
 
@@ -129,25 +128,8 @@ public class RoleController implements RoleServiceFacade {
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         JudgeRole judgeRole = new JudgeRole();
         judgeRole.setJudgeRoleKey(roleKey);
-        judgeRole.setOwn(hasRole(roles, roleKey));
+        judgeRole.setOwn(roleService.hasRole(roles, roleKey));
         result.setData(judgeRole);
         return result;
-    }
-
-    /**
-     * 判断是否超级管理员,条件:是否拥有roleKey为admin的角色
-     *
-     * @param roles
-     * @return
-     */
-    private boolean hasRole(List<Role> roles, String roleKey) {
-        if (StringUtils.isNotBlank(roleKey) && Objects.nonNull(roles) && roles.size() > 0) {
-            for (Role role : roles) {
-                if (roleKey.equalsIgnoreCase(role.getRoleKey())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

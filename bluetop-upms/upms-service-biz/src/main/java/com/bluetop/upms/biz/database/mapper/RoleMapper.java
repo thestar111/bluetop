@@ -6,6 +6,15 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * <角色Mapper>
+ *
+ * @author zhouping
+ * @version 1.0
+ * @date 2020/12/28 2:37 上午
+ * @see [相关类/方法]
+ * @since JDK 1.8
+ */
 @Mapper
 public interface RoleMapper {
 

@@ -3,7 +3,7 @@ package com.bluetop.upms.biz.provider.user;
 import com.bluetop.framework.core.cons.Result;
 import com.bluetop.upms.api.facade.UserServiceFacade;
 import com.bluetop.upms.api.vo.UserVO;
-import com.bluetop.upms.biz.core.AuthException;
+import com.bluetop.upms.biz.core.exception.AuthException;
 import com.bluetop.upms.biz.database.entity.User;
 import com.bluetop.upms.biz.database.mapper.UserMapper;
 import com.bluetop.upms.biz.utils.JWTUtil;
