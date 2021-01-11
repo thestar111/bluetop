@@ -3,7 +3,6 @@ package com.bluetop.upms.biz.provider.role;
 import cn.hutool.core.collection.CollectionUtil;
 import com.bluetop.framework.core.cons.Result;
 import com.bluetop.upms.api.dto.role.JudgeRoleParams;
-import com.bluetop.upms.api.facade.RoleServiceFacade;
 import com.bluetop.upms.api.vo.JudgeRole;
 import com.bluetop.upms.api.vo.RoleVO;
 import com.bluetop.upms.biz.cons.Config;

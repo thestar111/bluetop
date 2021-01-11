@@ -51,6 +51,16 @@ public class SystemException extends RuntimeException{
     /**
      * 构造方法
      *
+     * @param errorMsg
+     */
+    public SystemException(String errorMsg)
+    {
+        this.errorMsg = errorMsg;
+    }
+
+    /**
+     * 构造方法
+     *
      * @param errorCode
      * @param errorMsg
      */
