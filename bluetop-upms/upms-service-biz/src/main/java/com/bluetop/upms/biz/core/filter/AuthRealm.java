@@ -1,5 +1,6 @@
 package com.bluetop.upms.biz.core.filter;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.bluetop.upms.biz.cons.Config;
 import com.bluetop.upms.biz.core.token.Token;
 import com.bluetop.upms.biz.database.entity.Application;
@@ -74,17 +75,17 @@ public class AuthRealm extends AuthorizingRealm {
         String token = principals.toString();
         String username = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
-        User user = userMapper.getUserByUserName(username);
+        User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, username));
         if (user == null) {
             throw new AuthenticationException("User doesn't exist!");
         }
-        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
+        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         List<Resource> resources = null;
-        Application application = applicationMapper.getApplicationByAppkey(applicationKey);
+        Application application = applicationMapper.selectOne(Wrappers.<Application>query().lambda().eq(Application::getApplicationKey, applicationKey));
         if (roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE)) {
-            resources = resourceMapper.queryByApplicationId(application.getId());
+            resources = resourceMapper.getResourcesByAppKey(applicationKey);
         } else {
-            resources = resourceMapper.queryByApplicationId(application.getId());
+            resources = resourceMapper.getResourcesByUserAndAppKey(user.getId(), applicationKey);
         }
         return buildSimpleAuthorizationInfo(roles, resources);
     }
@@ -105,11 +106,11 @@ public class AuthRealm extends AuthorizingRealm {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(applicationKey)) {
             throw new AuthenticationException("Token is invalid!");
         }
-        User user = userMapper.getUserByUserName(username);
+        User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, username));
         if (Objects.isNull(user)) {
             throw new AuthenticationException("User doesn't exist!");
         }
-        Application application = applicationMapper.getApplicationByAppkey(applicationKey);
+        Application application = applicationMapper.selectOne(Wrappers.<Application>query().lambda().eq(Application::getApplicationKey, applicationKey));
         if (Objects.isNull(application)) {
             throw new AuthenticationException("Application " + applicationKey + " doesn't exist!");
         }

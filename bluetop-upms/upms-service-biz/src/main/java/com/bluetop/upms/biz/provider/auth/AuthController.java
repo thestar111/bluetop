@@ -1,6 +1,8 @@
 package com.bluetop.upms.biz.provider.auth;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.bluetop.framework.core.cons.Result;
 import com.bluetop.upms.api.dto.auth.AuthTokenParams;
 import com.bluetop.upms.api.dto.auth.JudgePerMissionparams;
@@ -39,6 +41,7 @@ import java.util.Objects;
 @Slf4j
 @RestController
 @Api(tags = "UPMS鉴权服务")
+@RequestMapping("/shiro/auth")
 public class AuthController implements AuthServiceFacade {
 
     @Autowired
@@ -64,11 +67,12 @@ public class AuthController implements AuthServiceFacade {
         if (Objects.nonNull(authTokenParms) && StringUtils.isNoneBlank(authTokenParms.getKey())
                 && StringUtils.isNoneBlank(authTokenParms.getName())
                 && StringUtils.isNoneBlank(authTokenParms.getPassword())) {
-            User user = userMapper.getUserByUserName(authTokenParms.getName());
+            Wrapper condition = Wrappers.<User>query().lambda().eq(User::getUsername, authTokenParms.getName()).eq(User::getStatus, 1);
+            User user = userMapper.selectOne(condition);
             if (Objects.isNull(user)) {
                 throw new AuthException("User doesn't existed!", 101);
             }
-            Application application = applicationMapper.getApplicationByAppkey(authTokenParms.getKey());
+            Application application = applicationMapper.selectOne(Wrappers.<Application>query().lambda().eq(Application::getApplicationKey, authTokenParms.getKey()));
             if (Objects.isNull(application)) {
                 throw new AuthException("Application " + authTokenParms.getKey() + " doesn't exist!", 120);
             }
@@ -130,13 +134,14 @@ public class AuthController implements AuthServiceFacade {
         }
         String applicationKey = JWTUtil.getApplicationKey(token);
         String username = JWTUtil.getUsername(token);
-        User user = userMapper.getUserByUserName(username);
+        Wrapper condition = Wrappers.<User>query().lambda().eq(User::getUsername, username);
+        User user = userMapper.selectOne(condition);
         List<Resource> resourceList = null;
-        Application application = applicationMapper.getApplicationByAppkey(applicationKey);
+        Application application = applicationMapper.selectOne(Wrappers.<Application>query().lambda().eq(Application::getApplicationKey, applicationKey));
         if (SecurityUtils.getSubject().hasRole(Config.SUPER_ADMIN_ROLE)) {
-            resourceList = resourceMapper.queryByApplicationId(application.getId());
+            resourceList = resourceMapper.getResourcesByAppKey(applicationKey);
         } else {
-            resourceList = resourceMapper.queryByApplicationId(application.getId());
+            resourceList = resourceMapper.getResourcesByUserAndAppKey(user.getId(), applicationKey);
         }
         if (CollectionUtil.isNotEmpty(resourceList)) {
             List<ResourceVO> resourceVOS = Lists.newArrayListWithCapacity(resourceList.size());

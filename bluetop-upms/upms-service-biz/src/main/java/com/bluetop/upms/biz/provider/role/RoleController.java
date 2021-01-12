@@ -1,8 +1,10 @@
 package com.bluetop.upms.biz.provider.role;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.bluetop.framework.core.cons.Result;
 import com.bluetop.upms.api.dto.role.JudgeRoleParams;
+import com.bluetop.upms.api.facade.RoleServiceFacade;
 import com.bluetop.upms.api.vo.JudgeRole;
 import com.bluetop.upms.api.vo.RoleVO;
 import com.bluetop.upms.biz.cons.Config;
@@ -60,8 +62,8 @@ public class RoleController implements RoleServiceFacade {
         }
         String userName = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
-        User user = userMapper.getUserByUserName(userName);
-        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
+        User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
+        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         if (CollectionUtil.isNotEmpty(roles)) {
             List<RoleVO> roleVOS = Lists.newArrayList();
             roles.stream().forEach(role -> {
@@ -94,8 +96,8 @@ public class RoleController implements RoleServiceFacade {
         }
         String userName = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
-        User user = userMapper.getUserByUserName(userName);
-        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
+        User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
+        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         resultInfo.setData(roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE));
         return resultInfo;
     }
@@ -123,8 +125,8 @@ public class RoleController implements RoleServiceFacade {
         String roleKey = judgeRoleParams.getRoleKey();
         String userName = JWTUtil.getUsername(token);
         String applicationKey = JWTUtil.getApplicationKey(token);
-        User user = userMapper.getUserByUserName(userName);
-        List<Role> roles = roleMapper.getRolesByAppKey(applicationKey);
+        User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
+        List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         JudgeRole judgeRole = new JudgeRole();
         judgeRole.setJudgeRoleKey(roleKey);
         judgeRole.setOwn(roleService.hasRole(roles, roleKey));

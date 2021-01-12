@@ -3,69 +3,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bluetop.upms.biz.database.mapper.ResourceMapper">
 
-    <sql id="BASIC_COL">
-        id, parent_id, application_id, name, code, url, description, type, icon, order, status, create_user_id, update_user_id
-    </sql>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.bluetop.upms.biz.database.entity.Resource">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="application_id" property="applicationId"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="url" property="url"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
+        <result column="icon" property="icon"/>
+        <result column="order" property="order"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user_id" property="updateUserId"/>
+    </resultMap>
 
-    <insert id="add" parameterType="Resource">
-        insert into upms_resource(<include refid="BASIC_COL"/>)
-        values (#{id}, #{parentId}, #{applicationId}, #{name}, #{code}, #{url}, #{description}, #{type}, #{icon}, #{order}, #{status}, #{createUserId}, #{updateUserId})
-    </insert>
+    <sql id="base_columns">
+		r.id,r.parent_id,r.application_id,r.name,r.code,r.url,r.description,r.type,r.icon,r.order,r.status,r.create_time,r.create_user_id,r.update_time,r.update_user_id
+	</sql>
 
-    <update id="modify" parameterType="Resource">
-        update upms_resource
-        <set>
-            <if test="parentId != null and parentId != ''">
-                parent_id = #{parentId},
-            </if>
-            <if test="name != null and name != ''">
-                name = #{name},
-            </if>
-            <if test="applicationId != null and applicationId != ''">
-                application_id = #{applicationId},
-            </if>
-            <if test="code != null and code != ''">
-                code = #{code},
-            </if>
-            <if test="url != null and url != ''">
-                url = #{url},
-            </if>
-            <if test="description != null and description != ''">
-                description = #{description},
-            </if>
-            <if test="type != null and type != ''">
-                type = #{type},
-            </if>
-            <if test="icon != null and icon != ''">
-                icon = #{icon},
-            </if>
-            <if test="order != null and order != ''">
-                order = #{order},
-            </if>
-            <if test="status != null and status != ''">
-                status = #{status},
-            </if>
-            <if test="updateUserId != null and updateUserId != ''">
-                update_user_id = #{updateUserId}
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <delete id="delete" parameterType="Integer">
-        delete from upms_resource where id = #{resourceId}
-    </delete>
-
-    <select id="queryByApplicationId" parameterType="Integer" resultType="Resource">
-        select * from  upms_resource where application_id = #{applicationId}
+    <select id="getResourcesByUserAndAppKey" resultType="com.bluetop.upms.biz.database.entity.Resource">
+        (SELECT
+        <include refid="base_columns"/>
+        FROM `upms_user` u,`upms_user_resource` ur,`upms_resource` r,`upms_application` app WHERE u.id = ur.user_id AND r.id =
+        ur.resource_id
+        AND r.application_id = app.id AND u.status=1 AND r.status = 1 AND
+        u.id = ${userId} AND app.application_key =
+        #{applicationKey})
+        UNION
+        (SELECT
+        <include refid="base_columns"/>
+        FROM `upms_user` u,`upms_user_role` ur,`upms_role` role,`upms_role_resource` rr, `upms_resource` r ,`upms_application` app WHERE u.id =
+        ur.user_id AND
+        ur.role_id = role.id AND role.id = rr.role_id AND r.id = rr.resource_id AND r.application_id = app.id AND
+        role.application_key = app.application_key AND
+        u.status=1 AND r.status = 1 AND role.status = 1
+        AND u.id = ${userId} AND app.application_key = #{applicationKey})
     </select>
 
-    <update id="modifyStatus">
-        update upms_resource set status = #{status} where id = #{id}
-    </update>
-
-    <select id="queryById" parameterType="Integer" resultType="Resource">
-        select * from  upms_resource where id = #{id}
+    <select id="getResourcesByAppKey" parameterType="java.lang.String" resultType="com.bluetop.upms.biz.database.entity.Resource">
+        SELECT
+        <include refid="base_columns"/>
+        FROM `upms_resource` r,`upms_application` app WHERE r.application_id = app.id AND app.application_key = #{applicationKey}
     </select>
 
 </mapper>

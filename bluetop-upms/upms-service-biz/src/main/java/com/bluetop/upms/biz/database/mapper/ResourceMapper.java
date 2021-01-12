@@ -1,61 +1,29 @@
 package com.bluetop.upms.biz.database.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bluetop.upms.biz.database.entity.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * <权限操作Mapper>
- *
- * @author zhouping
- * @version 1.0
- * @date 2020/12/28 2:37 上午
- * @see [相关类/方法]
- * @since JDK 1.8
- */
 @Mapper
-public interface ResourceMapper {
+public interface ResourceMapper extends BaseMapper<Resource> {
 
     /**
-     * 添加权限
+     * 根据用户及项目key查询当前用户拥有的资源
      *
-     * @param resource
+     * @param userId         用户id
+     * @param applicationKey 项目key
      * @return
      */
-    int add(Resource resource);
+    List<Resource> getResourcesByUserAndAppKey(@Param("userId") Integer userId, @Param("applicationKey") String applicationKey);
 
     /**
-     * 修改权限
+     * 获取当前项目所有资源
      *
-     * @param resource
+     * @param applicationKey
      * @return
      */
-    int modify(Resource resource);
-
-    /**
-     * 根据应用ID查询
-     *
-     * @param applicationId
-     * @return
-     */
-    List<Resource> queryByApplicationId(@Param("applicationId") Integer applicationId);
-
-    /**
-     * 删除权限
-     *
-     * @param status
-     * @param id
-     * @return
-     */
-    int modifyStatus(@Param("status") Integer status, @Param("id") Integer id);
-
-    /**
-     * 根据应用ID查询
-     *
-     * @param id
-     * @return
-     */
-    int queryById(@Param("id") Integer id);
+    List<Resource> getResourcesByAppKey(@Param("applicationKey") String applicationKey);
 }

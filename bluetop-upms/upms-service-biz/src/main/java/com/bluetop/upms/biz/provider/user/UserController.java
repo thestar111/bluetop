@@ -1,6 +1,8 @@
 package com.bluetop.upms.biz.provider.user;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.bluetop.framework.core.cons.Result;
+import com.bluetop.upms.api.facade.UserServiceFacade;
 import com.bluetop.upms.api.vo.UserVO;
 import com.bluetop.upms.biz.core.exception.AuthException;
 import com.bluetop.upms.biz.database.entity.User;
@@ -44,7 +46,7 @@ public class UserController implements UserServiceFacade {
         boolean isAllowed = SecurityUtils.getSubject().isAuthenticated();
         if (isAllowed) {
             String userName = JWTUtil.getUsername(token);
-            User user = userMapper.getUserByUserName(userName);
+            User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(user, userVO);
             result.setData(userVO);
