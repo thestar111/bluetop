@@ -6,34 +6,29 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 /**
- * <用户权限实体>
+ * <一句话功能描述>
  *
  * @author zhouping
  * @version 1.0
- * @date 2020/12/27 4:12 上午
+ * @date 2021/1/14 11:49 上午
  * @see [相关类/方法]
  * @since JDK 1.8
  */
 @Data
-@TableName("upms_user_resource")
-public class UserResource extends Model<UserResource> {
+@TableName("upms_role_menu")
+public class RoleMenu extends Model<RoleMenu> {
 
-    private static final long serialVersionUID = 1L;
     @TableId(type = IdType.AUTO)
     private Integer id;
+
     /**
-     * 用户ID
+     * 角色ID
      */
-    private Integer userId;
+    private Integer roleId;
+
     /**
-     * 权限ID
+     * 菜单ID
      */
-    private Integer resourceId;
-    private LocalDateTime createTime;
-    private Integer createUserId;
-    private LocalDateTime updateTime;
-    private Integer updateUserId;
+    private Integer menuId;
 }

@@ -2,6 +2,7 @@ package com.bluetop.upms.biz.database.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
@@ -9,46 +10,51 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * <应用信息表>
+ * <部门信息>
  *
  * @author zhouping
  * @version 1.0
- * @date 2020/12/27 4:12 上午
+ * @date 2021/1/14 11:37 上午
  * @see [相关类/方法]
  * @since JDK 1.8
  */
 @Data
-@TableName("upms_application")
-public class Application extends Model<Application> {
+@TableName(value = "upms_dept")
+public class Dept extends Model<Dept> {
 
     private static final long serialVersionUID = 1L;
+
+    @TableId(value = "dept_id", type = IdType.AUTO)
+    private Integer deptId;
+
     /**
-     * 业务ID
+     * 部门名称
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    private String name;
+
     /**
-     * 应用名称
+     * 排序
      */
-    private String applicationName;
-    /**
-     * 应用Key
-     */
-    private String applicationKey;
+    private Integer sort;
+
     /**
      * 创建时间
      */
     private LocalDateTime createTime;
+
     /**
-     * 创建用户ID
-     */
-    private Integer createUserId;
-    /**
-     * 更新时间
+     * 修改时间
      */
     private LocalDateTime updateTime;
+
     /**
-     * 更新用户ID
+     * 父级部门id
      */
-    private Integer updateUserId;
+    private Integer parentId;
+
+    /**
+     * 是否删除 -1：已删除 0：正常
+     */
+    @TableLogic
+    private String delFlag;
 }

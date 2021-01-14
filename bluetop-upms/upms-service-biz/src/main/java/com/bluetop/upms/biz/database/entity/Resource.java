@@ -5,10 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
-import org.aspectj.apache.bcel.classfile.Module;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <权限信息实体>
@@ -33,20 +31,22 @@ public class Resource extends Model<Resource> {
      * 资源编码
      */
     private String code;
+    /** URL链接 */
     private String url;
     private String description;
     /**
-     * 0:系统, 1:菜单, 2:Api
+     * 0:系统, 1:菜单, 2:Api(按钮)
      */
     private Integer type;
     private String icon;
+    /** 排序 */
     private Integer order;
     /**
      * 0:禁用 1:启用 -3:垃圾桶 -4:删除
      */
     private Integer status;
-    private Date createTime;
+    private LocalDateTime createTime;
     private Integer createUserId;
-    private Date updateTime;
+    private LocalDateTime updateTime;
     private Integer updateUserId;
 }

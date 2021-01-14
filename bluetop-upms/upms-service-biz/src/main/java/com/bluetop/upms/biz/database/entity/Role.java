@@ -6,8 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <角色实体>
@@ -29,6 +28,7 @@ public class Role extends Model<Role> {
      * 角色名称
      */
     private String roleName;
+    /** 角色Key */
     private String roleKey;
     /**
      * 角色描述
@@ -39,11 +39,11 @@ public class Role extends Model<Role> {
      */
     private Integer status;
     /**
-     * 项目key
+     * 应用项目key
      */
     private String applicationKey;
-    private Date createTime;
+    private LocalDateTime createTime;
     private Integer createUserId;
-    private Date updateTime;
+    private LocalDateTime updateTime;
     private Integer updateUserId;
 }
