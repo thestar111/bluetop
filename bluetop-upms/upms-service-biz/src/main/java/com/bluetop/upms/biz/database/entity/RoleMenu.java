@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
 /**
- * <一句话功能描述>
+ * <角色菜单>
  *
  * @author zhouping
  * @version 1.0

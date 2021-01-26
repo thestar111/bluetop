@@ -37,7 +37,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * <授权服务>
+ *
+ * @author zhouping
+ * @version 1.0
+ * @date 2020/12/27 4:12 上午
+ * @see [相关类/方法]
+ * @since JDK 1.8
+ */
 @Slf4j
 @RestController
 @Api(tags = "UPMS鉴权服务")

@@ -5,7 +5,7 @@ import com.bluetop.upms.biz.database.entity.DeptRelation;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <一句话功能描述>
+ * <组织关系数据Mapper>
  *
  * @author zhouping
  * @version 1.0

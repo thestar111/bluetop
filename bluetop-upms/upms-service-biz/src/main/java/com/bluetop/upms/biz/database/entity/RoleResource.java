@@ -22,12 +22,37 @@ import java.time.LocalDateTime;
 public class RoleResource extends Model<RoleResource> {
 
     private static final long serialVersionUID = 1L;
+
     @TableId(type = IdType.AUTO)
     private Integer id;
+
+    /**
+     * 角色ID
+     */
     private Integer roleId;
+
+    /**
+     * 权限ID
+     */
     private Integer resourceId;
+
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
+
+    /**
+     * 创建用户ID
+     */
     private Integer createUserId;
+
+    /**
+     * 更新时间
+     */
     private LocalDateTime updateTime;
+
+    /**
+     * 更新用户ID
+     */
     private Integer updateUserId;
 }

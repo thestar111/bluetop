@@ -24,25 +24,74 @@ public class User extends Model<User> {
     private static final long serialVersionUID = 1L;
     @TableId(type = IdType.AUTO)
     private Integer id;
+
+    /**
+     * 用户名
+     */
     private String username;
+
+    /**
+     * 密码
+     */
     private String password;
+
+    /**
+     * 公司名
+     */
     private String company;
-    /** 头像 */
+
+    /**
+     * 头像
+     */
     private String avatar;
-    /** 部门ID */
+
+    /**
+     * 部门ID
+     */
     private Integer deptId;
-    /** 手机号码 */
+
+    /**
+     * 手机号码
+     */
     private String phone;
+
+    /**
+     * 邮箱
+     */
     private String email;
+
+    /**
+     * 秘钥
+     */
     private String secret;
+
     /**
      * 0：注销，1:激活 -4:删除
      */
     private Integer status;
-    /** 0-正常，9-锁定 */
+
+    /**
+     * 0-正常，9-锁定
+     */
     private Integer lockFlag;
+
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
-    private String createUserId;
+
+    /**
+     * 创建用户ID
+     */
+    private Integer createUserId;
+
+    /**
+     * 更新时间
+     */
     private LocalDateTime updateTime;
-    private String updateUserId;
+
+    /**
+     * 更新用户ID
+     */
+    private Integer updateUserId;
 }

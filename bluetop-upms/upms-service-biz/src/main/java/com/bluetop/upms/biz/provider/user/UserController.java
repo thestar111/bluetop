@@ -20,6 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * <用户接口>
+ *
+ * @author zhouping
+ * @version 1.0
+ * @date 2020/12/27 4:12 上午
+ * @see [相关类/方法]
+ * @since JDK 1.8
+ */
 @Slf4j
 @RestController
 @Api(tags = "基于Shiro用户服务")

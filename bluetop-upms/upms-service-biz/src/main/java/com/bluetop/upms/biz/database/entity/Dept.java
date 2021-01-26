@@ -10,7 +10,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * <部门信息>
+ * <组织结构信息>
  *
  * @author zhouping
  * @version 1.0

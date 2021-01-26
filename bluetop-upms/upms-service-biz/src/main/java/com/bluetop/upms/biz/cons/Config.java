@@ -1,12 +1,15 @@
 package com.bluetop.upms.biz.cons;
 
 /**
- * 系统参数配置类，配置了系统用到参数
+ * <系统参数配置类，配置了系统用到参数>
  *
- * @author mrt
+ * @author zhouping
+ * @version 1.0
+ * @date 2020/12/27 4:12 上午
+ * @see [相关类/方法]
+ * @since JDK 1.8
  */
 public interface Config {
-
 
     /**
      * 系统语言环境，默认为中文zh
@@ -37,6 +40,7 @@ public interface Config {
      * jwt自定义属性名称
      */
     String JWT_CLIENT_USERNAME = "userName";
+
     String JWT_APPLICATION_KEY = "applicationKey";
     /**
      * 客户端传token参数名称

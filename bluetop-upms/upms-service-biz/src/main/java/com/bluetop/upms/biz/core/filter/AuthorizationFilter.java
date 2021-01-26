@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * <一句话功能描述>
+ * <授权过滤器>
  *
  * @author zhouping
  * @version 1.0

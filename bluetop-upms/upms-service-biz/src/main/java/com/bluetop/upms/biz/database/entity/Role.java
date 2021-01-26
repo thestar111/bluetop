@@ -22,28 +22,51 @@ import java.time.LocalDateTime;
 public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
+
     @TableId(type = IdType.AUTO)
     private Integer id;
     /**
      * 角色名称
      */
     private String roleName;
-    /** 角色Key */
+
+    /**
+     * 角色Key
+     */
     private String roleKey;
+
     /**
      * 角色描述
      */
     private String roleDesc;
+
     /**
      * 状态，0：禁用 1：启用 -4:删除
      */
     private Integer status;
+
     /**
      * 应用项目key
      */
     private String applicationKey;
+
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
+
+    /**
+     * 创建用户ID
+     */
     private Integer createUserId;
+
+    /**
+     * 更新时间
+     */
     private LocalDateTime updateTime;
+
+    /**
+     * 更新用户ID
+     */
     private Integer updateUserId;
 }

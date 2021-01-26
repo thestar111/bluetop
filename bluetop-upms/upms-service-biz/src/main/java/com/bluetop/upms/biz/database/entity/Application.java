@@ -27,26 +27,32 @@ public class Application extends Model<Application> {
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
+
     /**
      * 应用名称
      */
     private String applicationName;
+
     /**
      * 应用Key
      */
     private String applicationKey;
+
     /**
      * 创建时间
      */
     private LocalDateTime createTime;
+
     /**
      * 创建用户ID
      */
     private Integer createUserId;
+
     /**
      * 更新时间
      */
     private LocalDateTime updateTime;
+
     /**
      * 更新用户ID
      */

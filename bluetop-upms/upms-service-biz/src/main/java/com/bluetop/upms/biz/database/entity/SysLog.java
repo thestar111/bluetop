@@ -26,12 +26,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- * 日志表
- * </p>
+ * <系统日志>
  *
- * @author lengleng
- * @since 2019/2/1
+ * @author zhouping
+ * @version 1.0
+ * @date 2021/1/14 12:10 下午
+ * @see [相关类/方法]
+ * @since JDK 1.8
  */
 @Data
 @TableName(value = "upms_sys_log")

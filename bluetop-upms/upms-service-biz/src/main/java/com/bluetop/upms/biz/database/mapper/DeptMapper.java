@@ -5,7 +5,7 @@ import com.bluetop.upms.biz.database.entity.Dept;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <组织架构>
+ * <组织架构数据Mapper>
  *
  * @author zhouping
  * @version 1.0

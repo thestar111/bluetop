@@ -5,7 +5,7 @@ import com.bluetop.upms.biz.database.entity.RoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <一句话功能描述>
+ * <角色菜单数据Mapper>
  *
  * @author zhouping
  * @version 1.0

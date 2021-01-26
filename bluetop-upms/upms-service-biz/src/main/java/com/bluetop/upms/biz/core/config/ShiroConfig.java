@@ -17,7 +17,15 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * <权限配置>
+ *
+ * @author zhouping
+ * @version 1.0
+ * @date 2020/12/27 4:12 上午
+ * @see [相关类/方法]
+ * @since JDK 1.8
+ */
 @Configuration
 public class ShiroConfig {
 
@@ -61,7 +69,7 @@ public class ShiroConfig {
         filterRuleMap.put("/swagger*/**", "anon");
         filterRuleMap.put("/v2/**", "anon");
         filterRuleMap.put("/webjars/**", "anon");
-        filterRuleMap.put("/**","anon");
+        filterRuleMap.put("/**", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }
