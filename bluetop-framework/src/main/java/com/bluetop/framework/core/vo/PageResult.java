@@ -7,13 +7,11 @@
  * 修改单号:  <修改单号>
  * 修改内容:  <修改内容>
  */
-package com.bluetop.framework.core.cons;
+package com.bluetop.framework.core.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * <列表数据返回实体>
@@ -27,7 +25,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageResult<T> extends Result<T> {
+public class PageResult<T> extends R<T> {
 
     /** 总数 */
     private int total = 0;

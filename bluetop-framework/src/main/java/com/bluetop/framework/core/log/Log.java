@@ -9,7 +9,7 @@
  */
 package com.bluetop.framework.core.log;
 
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -61,7 +61,7 @@ public class Log {
      * 后置通知
      */
     @AfterReturning(returning = "result", pointcut = "point()")
-    public void logResultVOInfo(Result result) {
+    public void logResultVOInfo(R result) {
         log.info("请求响应吗 ：【{}】 \t	响应结果 ：【{}】", result.getCode(), result);
     }
 }

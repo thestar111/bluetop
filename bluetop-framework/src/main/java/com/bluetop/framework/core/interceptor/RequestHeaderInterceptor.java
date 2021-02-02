@@ -23,9 +23,7 @@ public class RequestHeaderInterceptor implements RequestInterceptor {
     @Value("${spring.application.name}")
     private String applicationName;
 
-    public RequestHeaderInterceptor() {
-
-    }
+    public RequestHeaderInterceptor() {}
 
     /**
      * 添加请求头

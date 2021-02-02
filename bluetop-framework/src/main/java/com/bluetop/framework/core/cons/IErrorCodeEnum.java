@@ -22,10 +22,16 @@ import lombok.Getter;
  */
 @Getter
 public enum IErrorCodeEnum {
+
     /**
      * 成功
      */
     Business_success(0, "Success."),
+
+    /**
+     * 没有权限
+     */
+    Not_Auth(403, "No Auth."),
 
     /**
      * 业务失败
@@ -88,6 +94,16 @@ public enum IErrorCodeEnum {
     Service_not_available(900009, "Service Not Available.");
 
     /**
+     * 错误码
+     */
+    private int errorCode;
+
+    /**
+     * 错误信息
+     */
+    private String errorMsg;
+
+    /**
      * 构造方法
      *
      * @param errorCode
@@ -97,14 +113,4 @@ public enum IErrorCodeEnum {
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }
-
-    /**
-     * 错误码
-     */
-    private int errorCode;
-
-    /**
-     * 错误信息
-     */
-    private String errorMsg;
 }

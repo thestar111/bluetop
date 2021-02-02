@@ -1,6 +1,5 @@
 package com.bluetop.framework.core.configuration;
 
-import com.bluetop.framework.core.handler.GlobalExceptionHandler;
 import com.bluetop.framework.core.log.Log;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +16,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LogPrintConfiguration {
 
+    /**
+     * 开启日志拦截
+     *
+     * @return
+     */
     @Bean
     public Log log() {
         return new Log();
