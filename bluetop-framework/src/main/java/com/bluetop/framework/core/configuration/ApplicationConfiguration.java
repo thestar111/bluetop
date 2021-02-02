@@ -39,6 +39,7 @@ public class ApplicationConfiguration implements TomcatConnectorCustomizer, Appl
 
     private volatile Connector connector;
 
+    /** 应用程序等待时间 */
     private final int WAIT_TIME = 10;
 
     /**
@@ -51,7 +52,7 @@ public class ApplicationConfiguration implements TomcatConnectorCustomizer, Appl
     public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
         log.info("[ApplicationConfiguration] bootstrap application : {} instanceid : {}", applicationName, instanceId);
         return new ServletRegistrationBean(dispatcherServlet, String.format("/%s/api/*", applicationName),
-                "/actuator/prometheus", "/actuator/health", "/v2/api-docs", "/*");
+                "/actuator/prometheus", "/actuator/health", "/actuator/shutdown", "/v2/api-docs", "/*");
     }
 
     /**
