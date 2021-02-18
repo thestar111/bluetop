@@ -2,7 +2,7 @@ package com.bluetop.upms.biz.provider.role;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.role.JudgeRoleParams;
 import com.bluetop.upms.api.facade.RoleServiceFacade;
 import com.bluetop.upms.api.vo.JudgeRole;
@@ -58,8 +58,8 @@ public class RoleController implements RoleServiceFacade {
     @GetMapping(value = "/list")
     @ApiOperation(value = "获取当前用户拥有的角色")
     @RequiresAuthentication
-    public Result<List<RoleVO>> listRole() {
-        Result<List<RoleVO>> resultInfo = new Result<>();
+    public R<List<RoleVO>> listRole() {
+        R<List<RoleVO>> result = new R<>();
         String token = null;
         if (StringUtils.isBlank(token)) {
             throw new AuthException("Params invalid!", 504);
@@ -79,9 +79,9 @@ public class RoleController implements RoleServiceFacade {
                 BeanUtils.copyProperties(role, roleVO);
                 roleVOS.add(roleVO);
             });
-            resultInfo.setData(roleVOS);
+            result.setData(roleVOS);
         }
-        return resultInfo;
+        return result;
     }
 
     /**
@@ -92,8 +92,8 @@ public class RoleController implements RoleServiceFacade {
     @GetMapping(value = "/judge/super")
     @ApiOperation(value = "判断当前用户是否拥有超级管理员角色")
     @RequiresAuthentication
-    public Result<Boolean> judgeSuper() {
-        Result<Boolean> resultInfo = new Result<>();
+    public R<Boolean> judgeSuper() {
+        R<Boolean> result = new R<>();
         String token = null;
         if (StringUtils.isBlank(token)) {
             throw new AuthException("Params invalid!", 504);
@@ -106,8 +106,8 @@ public class RoleController implements RoleServiceFacade {
         String applicationKey = JWTUtil.getApplicationKey(token);
         User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
-        resultInfo.setData(roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE));
-        return resultInfo;
+        result.setData(roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE));
+        return result;
     }
 
     /**
@@ -119,8 +119,8 @@ public class RoleController implements RoleServiceFacade {
     @PostMapping(value = "/judge/role")
     @ApiOperation(value = "判断当前用户是否拥有某个角色")
     @RequiresAuthentication
-    public Result<JudgeRole> judgeRole(@RequestBody JudgeRoleParams judgeRoleParams) {
-        Result<JudgeRole> result = new Result<>();
+    public R<JudgeRole> judgeRole(@RequestBody JudgeRoleParams judgeRoleParams) {
+        R<JudgeRole> result = new R<>();
         String token = null;
         if (StringUtils.isBlank(token) || Objects.isNull(judgeRoleParams)
                 || StringUtils.isBlank(judgeRoleParams.getRoleKey())) {

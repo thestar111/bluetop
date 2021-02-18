@@ -36,7 +36,13 @@ public class ResourceVO implements Serializable {
      * 资源编码
      */
     private String code;
+    /**
+     * 地址
+     */
     private String url;
+    /**
+     * 描述
+     */
     private String description;
     /**
      * 0:系统, 1:菜单, 2:Api

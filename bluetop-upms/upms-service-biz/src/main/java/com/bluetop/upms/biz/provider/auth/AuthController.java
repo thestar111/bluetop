@@ -3,7 +3,7 @@ package com.bluetop.upms.biz.provider.auth;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.auth.AuthTokenParams;
 import com.bluetop.upms.api.dto.auth.JudgePerMissionparams;
 import com.bluetop.upms.api.facade.AuthServiceFacade;
@@ -42,7 +42,7 @@ import java.util.Objects;
  *
  * @author zhouping
  * @version 1.0
- * @date 2020/12/27 4:12 上午
+ * @date 2020/12/27 4:12 上午ø
  * @see [相关类/方法]
  * @since JDK 1.8
  */
@@ -52,15 +52,17 @@ import java.util.Objects;
 @RequestMapping("/shiro/auth")
 public class AuthController implements AuthServiceFacade {
 
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private ResourceMapper resourceMapper;
-    @Autowired
-    private ApplicationMapper applicationMapper;
-
     @Value("${jwt.token.active.time:300000}")
     private long activeTime = 5 * 60 * 1000;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private ResourceMapper resourceMapper;
+
+    @Autowired
+    private ApplicationMapper applicationMapper;
 
     /**
      * 获取用户token
@@ -70,8 +72,8 @@ public class AuthController implements AuthServiceFacade {
      */
     @PostMapping(value = "/token")
     @ApiOperation(value = "获取token")
-    public Result<String> getToken(@RequestBody AuthTokenParams authTokenParms) {
-        Result<String> result = new Result<>();
+    public R<String> getToken(@RequestBody AuthTokenParams authTokenParms) {
+        R<String> R = new R<>();
         if (Objects.nonNull(authTokenParms) && StringUtils.isNoneBlank(authTokenParms.getKey())
                 && StringUtils.isNoneBlank(authTokenParms.getName())
                 && StringUtils.isNoneBlank(authTokenParms.getPassword())) {
@@ -86,7 +88,7 @@ public class AuthController implements AuthServiceFacade {
             }
             if (authTokenParms.getPassword().equals(user.getPassword())) {
                 try {
-                    result.setData(JWTUtil.sign(user.getUsername(), user.getSecret(), authTokenParms.getKey(), activeTime));
+                    R.setData(JWTUtil.sign(user.getUsername(), user.getSecret(), authTokenParms.getKey(), activeTime));
                 } catch (UnsupportedEncodingException e) {
                     log.error("Method getToken occur an UnsupportedEncodingException!", e);
                     throw new AuthException("Params invalid!", 504);
@@ -98,7 +100,7 @@ public class AuthController implements AuthServiceFacade {
         } else {
             throw new AuthException("Params invalid!", 504);
         }
-        return result;
+        return R;
     }
 
     /**
@@ -113,11 +115,11 @@ public class AuthController implements AuthServiceFacade {
             @ApiImplicitParam(name = Config.JWT_CUSTOMER_TOKEN_NAME, value = "认证token", required = true, dataType = "string", paramType = "header")
     })
     @RequiresAuthentication
-    public Result<Boolean> judgePermission(@RequestBody JudgePerMissionparams judgePerMissionparams) {
+    public R<Boolean> judgePermission(@RequestBody JudgePerMissionparams judgePerMissionparams) {
         if (Objects.isNull(judgePerMissionparams) || StringUtils.isBlank(judgePerMissionparams.getUrlAddress())) {
             throw new AuthException("Params invalid!", 504);
         }
-        Result<Boolean> result = new Result<>();
+        R<Boolean> result = new R<>();
         boolean isAllowed = SecurityUtils.getSubject().isPermitted(judgePerMissionparams.getUrlAddress());
         result.setData(isAllowed);
         return result;
@@ -135,8 +137,8 @@ public class AuthController implements AuthServiceFacade {
             @ApiImplicitParam(name = Config.JWT_CUSTOMER_TOKEN_NAME, value = "认证token", required = true, dataType = "string", paramType = "header")
     })
     @RequiresAuthentication
-    public Result<List<ResourceVO>> listPermission(@RequestHeader("Authorization") String token) {
-        Result<List<ResourceVO>> Result = new Result<>();
+    public R<List<ResourceVO>> listPermission(@RequestHeader("Authorization") String token) {
+        R<List<ResourceVO>> result = new R<>();
         if (!SecurityUtils.getSubject().isAuthenticated()) {
             throw new AuthException("Params invalid!", 504);
         }
@@ -158,9 +160,9 @@ public class AuthController implements AuthServiceFacade {
                 BeanUtils.copyProperties(resource, resourceVO);
                 resourceVOS.add(resourceVO);
             });
-            Result.setData(resourceVOS);
+            result.setData(resourceVOS);
         }
-        return Result;
+        return result;
     }
 
     /**
@@ -171,10 +173,10 @@ public class AuthController implements AuthServiceFacade {
     @GetMapping(value = "/401")
     @ApiIgnore
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public Result<String> unauthorized() {
-        Result<String> Result = new Result<>();
-        Result.setCode(119);
-        return Result;
+    public R<String> unauthorized() {
+        R<String> R = new R<>();
+        R.setCode(119);
+        return R;
     }
 
 }

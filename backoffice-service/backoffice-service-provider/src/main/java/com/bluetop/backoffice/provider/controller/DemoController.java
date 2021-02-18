@@ -14,7 +14,7 @@ import com.bluetop.backoffice.data.entity.Config;
 import com.bluetop.backoffice.data.mapper.ConfigMapper;
 import com.bluetop.contract.api.facade.demo.ContractDemoFacade;
 import com.bluetop.framework.core.annotation.PrintLog;
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.framework.core.utils.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,10 +59,8 @@ public class DemoController implements DemoServiceFacade {
     @PrintLog
     @ApiOperation("示例AIP接口")
     @PostMapping("/say")
-    public Result<String> sayHello(@RequestParam("name") String name) {
+    public R<String> sayHello(@RequestParam("name") String name) {
         List<Config> configs = configMapper.getAll();
-        Result<String> result = new Result<>();
-        result.setData(JsonUtils.toJson(configs));
-        return result;
+        return R.ok(JsonUtils.toJson(configs));
     }
 }

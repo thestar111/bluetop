@@ -1,7 +1,7 @@
 package com.bluetop.upms.biz.provider.user;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.facade.UserServiceFacade;
 import com.bluetop.upms.api.vo.UserVO;
 import com.bluetop.upms.biz.core.exception.AuthException;
@@ -46,8 +46,8 @@ public class UserController implements UserServiceFacade {
     @GetMapping(value = "/current")
     @ApiOperation(value = "获取当前用户")
     @RequiresAuthentication
-    public Result<UserVO> getCurrentUser() {
-        Result<UserVO> result = new Result<>();
+    public R<UserVO> getCurrentUser() {
+        R<UserVO> result = new R<>();
         String token = null;
         if (StringUtils.isBlank(token)) {
             throw new AuthException("Params invalid!", 504);

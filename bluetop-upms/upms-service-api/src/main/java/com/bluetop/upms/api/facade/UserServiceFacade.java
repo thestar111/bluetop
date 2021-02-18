@@ -9,7 +9,7 @@
  */
 package com.bluetop.upms.api.facade;
 
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.vo.UserVO;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -30,5 +30,5 @@ public interface UserServiceFacade {
      * @return
      */
     @GetMapping(value = "/current")
-    Result<UserVO> getCurrentUser();
+    R<UserVO> getCurrentUser();
 }

@@ -9,7 +9,7 @@
  */
 package com.bluetop.upms.api.facade;
 
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.auth.AuthTokenParams;
 import com.bluetop.upms.api.dto.auth.JudgePerMissionparams;
 import com.bluetop.upms.api.vo.ResourceVO;
@@ -38,7 +38,7 @@ public interface AuthServiceFacade {
      * @return
      */
     @PostMapping(value = "/upms-service/api/token")
-    Result<String> getToken(@RequestBody AuthTokenParams authTokenParms);
+    R<String> getToken(@RequestBody AuthTokenParams authTokenParms);
 
     /**
      * 判断是否有权限
@@ -47,7 +47,7 @@ public interface AuthServiceFacade {
      * @return
      */
     @PostMapping(value = "/upms-service/api/judge/permission")
-    Result<Boolean> judgePermission(@RequestBody JudgePerMissionparams judgePerMissionparams);
+    R<Boolean> judgePermission(@RequestBody JudgePerMissionparams judgePerMissionparams);
 
     /**
      * 获取用户权限
@@ -56,7 +56,7 @@ public interface AuthServiceFacade {
      * @return
      */
     @GetMapping(value = "/upms-service/api/list/permission")
-    Result<List<ResourceVO>> listPermission(@RequestHeader("Authorization") String token);
+    R<List<ResourceVO>> listPermission(@RequestHeader("Authorization") String token);
 
     /**
      * 未授权
@@ -64,5 +64,5 @@ public interface AuthServiceFacade {
      * @return
      */
     @GetMapping(value = "/upms-service/api/401")
-    Result<String> unauthorized();
+    R<String> unauthorized();
 }

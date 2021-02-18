@@ -9,7 +9,7 @@
  */
 package com.bluetop.upms.api.facade;
 
-import com.bluetop.framework.core.cons.Result;
+import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.role.JudgeRoleParams;
 import com.bluetop.upms.api.vo.JudgeRole;
 import com.bluetop.upms.api.vo.RoleVO;
@@ -36,7 +36,7 @@ public interface RoleServiceFacade {
      * @return
      */
     @GetMapping(value = "/upms-service/api/list")
-    Result<List<RoleVO>> listRole();
+    R<List<RoleVO>> listRole();
 
     /**
      * 判断当前用户是否拥有超级管理员角色
@@ -44,7 +44,7 @@ public interface RoleServiceFacade {
      * @return
      */
     @GetMapping(value = "/upms-service/api/judge/super")
-    Result<Boolean> judgeSuper();
+    R<Boolean> judgeSuper();
 
     /**
      * 判断当前用户是否拥有某个角色
@@ -53,5 +53,5 @@ public interface RoleServiceFacade {
      * @return
      */
     @PostMapping(value = "/upms-service/api/judge/role")
-    Result<JudgeRole> judgeRole(@RequestBody JudgeRoleParams judgeRoleParams);
+    R<JudgeRole> judgeRole(@RequestBody JudgeRoleParams judgeRoleParams);
 }
