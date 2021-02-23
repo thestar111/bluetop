@@ -30,25 +30,4 @@ public interface Config {
      * 提示信息配置文件名
      */
     String MESSAGE = "i18n/messages";
-
-    /**
-     * jwt签发者的名称
-     */
-    String JWT_IUSER = "cms";
-
-    /**
-     * jwt自定义属性名称
-     */
-    String JWT_CLIENT_USERNAME = "userName";
-
-    String JWT_APPLICATION_KEY = "applicationKey";
-    /**
-     * 客户端传token参数名称
-     */
-    String JWT_CUSTOMER_TOKEN_NAME = "Authorization";
-
-    /**
-     * 超级管理员角色key
-     */
-    String SUPER_ADMIN_ROLE = "admin";
 }

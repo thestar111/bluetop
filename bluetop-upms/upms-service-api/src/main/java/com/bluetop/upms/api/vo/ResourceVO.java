@@ -29,27 +29,49 @@ public class ResourceVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+
     private Integer parentId;
+
+    /**
+     * 系统应用ID
+     */
     private Integer applicationId;
+
+    /**
+     * 名称
+     */
     private String name;
+
     /**
      * 资源编码
      */
     private String code;
+
     /**
-     * 地址
+     * 跳转地址
      */
     private String url;
+
     /**
      * 描述
      */
     private String description;
+
     /**
      * 0:系统, 1:菜单, 2:Api
      */
     private Integer type;
+
+    /**
+     * 图标ICON
+     */
     private String icon;
+
+    /**
+     * 序号
+     */
     private Integer order;
+
     /**
      * 0:禁用 1:启用 -3:垃圾桶 -4:删除
      */

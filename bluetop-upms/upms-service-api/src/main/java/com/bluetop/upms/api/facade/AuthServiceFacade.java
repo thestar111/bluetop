@@ -11,7 +11,7 @@ package com.bluetop.upms.api.facade;
 
 import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.auth.AuthTokenParams;
-import com.bluetop.upms.api.dto.auth.JudgePerMissionparams;
+import com.bluetop.upms.api.dto.auth.JudgePerMissionParams;
 import com.bluetop.upms.api.vo.ResourceVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +47,7 @@ public interface AuthServiceFacade {
      * @return
      */
     @PostMapping(value = "/upms-service/api/judge/permission")
-    R<Boolean> judgePermission(@RequestBody JudgePerMissionparams judgePerMissionparams);
+    R<Boolean> judgePermission(@RequestBody JudgePerMissionParams judgePerMissionparams);
 
     /**
      * 获取用户权限

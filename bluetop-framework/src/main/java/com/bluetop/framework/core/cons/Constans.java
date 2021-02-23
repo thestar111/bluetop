@@ -24,4 +24,29 @@ public interface Constans {
      * 日志链ID
      */
     public static final String TRANCE_ID = "tranceID";
+
+    /**
+     * jwt签发者的名称
+     */
+    String JWT_IUSER = "cms";
+
+    /**
+     * jwt自定义属性名称
+     */
+    String JWT_CLIENT_USERNAME = "userName";
+
+    /**
+     * 应用key
+     */
+    String JWT_APPLICATION_KEY = "applicationKey";
+
+    /**
+     * 客户端传token参数名称
+     */
+    String JWT_CUSTOMER_TOKEN_NAME = "Authorization";
+
+    /**
+     * 超级管理员角色key
+     */
+    String SUPER_ADMIN_ROLE = "admin";
 }

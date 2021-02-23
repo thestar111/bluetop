@@ -1,11 +1,11 @@
-package com.bluetop.upms.biz.utils;
+package com.bluetop.framework.core.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.bluetop.upms.biz.cons.Config;
+import com.bluetop.framework.core.cons.Constans;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -13,16 +13,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
- * <JWT工具类>
+ * <用户JWT信息加解密>
  *
  * @author zhouping
  * @version 1.0
- * @date 2020/12/28 2:37 上午
+ * @date 2021/2/23 4:45 上午
  * @see [相关类/方法]
  * @since JDK 1.8
  */
 @Slf4j
-public final class JWTUtil {
+public final class JWTUtils {
 
     /**
      * 校验token是否正确
@@ -35,8 +35,8 @@ public final class JWTUtil {
     public static void verify(String token, String username, String secret) throws Exception {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         JWTVerifier verifier = JWT.require(algorithm)
-                .withClaim(Config.JWT_CLIENT_USERNAME, username)
-                .withIssuer(Config.JWT_IUSER)
+                .withClaim(Constans.JWT_CLIENT_USERNAME, username)
+                .withIssuer(Constans.JWT_IUSER)
                 .build();
         verifier.verify(token);
     }
@@ -50,7 +50,7 @@ public final class JWTUtil {
     public static String getUsername(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim(Config.JWT_CLIENT_USERNAME).asString();
+            return jwt.getClaim(Constans.JWT_CLIENT_USERNAME).asString();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -65,7 +65,7 @@ public final class JWTUtil {
     public static String getApplicationKey(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim(Config.JWT_APPLICATION_KEY).asString();
+            return jwt.getClaim(Constans.JWT_APPLICATION_KEY).asString();
         } catch (JWTDecodeException e) {
             log.error("[JWTUtils] get application key failed. {}", ExceptionUtils.getRootCauseMessage(e));
             return null;
@@ -87,9 +87,9 @@ public final class JWTUtil {
         Date expireTime = new Date(currentTimes + activeTime);
         Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()
-                .withClaim(Config.JWT_CLIENT_USERNAME, username)
-                .withClaim(Config.JWT_APPLICATION_KEY, applicationKey)
-                .withIssuer(Config.JWT_IUSER)
+                .withClaim(Constans.JWT_CLIENT_USERNAME, username)
+                .withClaim(Constans.JWT_APPLICATION_KEY, applicationKey)
+                .withIssuer(Constans.JWT_IUSER)
                 .withExpiresAt(expireTime)
                 .withIssuedAt(signdate)
                 .sign(algorithm);
