@@ -45,6 +45,25 @@
         AND u.id = ${userId} AND app.application_key = #{applicationKey})
     </select>
 
+    <!--获取当前用户项目-->
+    <select id="getResourceByUser" resultType="com.bluetop.upms.biz.database.entity.Resource">
+        SELECT
+        r.id,r.application_id,r.name,r.code,r.url,r.description,r.type,r.icon,r.order
+        FROM `upms_user` u,`upms_user_resource` ur,`upms_resource` r,`upms_application` app WHERE u.id = ur.user_id AND r.id =
+        ur.resource_id
+        AND r.application_id = app.id AND u.status=1 AND r.status = 1 AND r.type = ${type} AND
+        u.id = ${userId}
+    </select>
+
+    <select id="getAllResourceByUser" resultType="com.bluetop.upms.biz.database.entity.Resource">
+        SELECT
+        r.id,r.application_id,r.name,r.code,r.url,r.description,r.type,r.icon,r.order
+        FROM `upms_user` u,`upms_user_resource` ur,`upms_resource` r,`upms_application` app WHERE u.id = ur.user_id AND r.id =
+        ur.resource_id
+        AND r.application_id = app.id AND u.status=1 AND r.status = 1 AND
+        u.id = ${userId}
+    </select>
+
     <select id="getResourcesByAppKey" parameterType="java.lang.String" resultType="com.bluetop.upms.biz.database.entity.Resource">
         SELECT
         <include refid="base_columns"/>

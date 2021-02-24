@@ -63,8 +63,8 @@ public class ShiroConfig {
          * http://shiro.apache.org/web.html#urls-
          */
         Map<String, String> filterRuleMap = new HashMap<>();
-        filterRuleMap.put("/shiro/**", "jwt");
-        filterRuleMap.put("/shiro/auth/401", "anon");
+        filterRuleMap.put("/auth/**", "jwt");
+        filterRuleMap.put("/auth/401", "anon");
         //不拦截swagger
         filterRuleMap.put("/swagger*/**", "anon");
         filterRuleMap.put("/v2/**", "anon");

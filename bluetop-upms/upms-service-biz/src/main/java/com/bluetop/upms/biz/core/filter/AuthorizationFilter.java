@@ -1,6 +1,6 @@
 package com.bluetop.upms.biz.core.filter;
 
-import com.bluetop.upms.biz.cons.Config;
+import com.bluetop.framework.core.cons.Constans;
 import com.bluetop.upms.biz.core.token.Token;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -32,7 +32,7 @@ public class AuthorizationFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
-        String authorization = req.getHeader(Config.JWT_CUSTOMER_TOKEN_NAME);
+        String authorization = req.getHeader(Constans.JWT_CUSTOMER_TOKEN_NAME);
         return authorization != null;
     }
 
@@ -42,7 +42,7 @@ public class AuthorizationFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String authorization = httpServletRequest.getHeader(Config.JWT_CUSTOMER_TOKEN_NAME);
+        String authorization = httpServletRequest.getHeader(Constans.JWT_CUSTOMER_TOKEN_NAME);
 
         Token token = new Token(authorization);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获

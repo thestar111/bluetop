@@ -10,6 +10,9 @@ import com.bluetop.upms.api.dto.auth.AuthTokenParams;
 import com.bluetop.upms.api.dto.auth.JudgePerMissionParams;
 import com.bluetop.upms.api.facade.AuthServiceFacade;
 import com.bluetop.upms.api.vo.ResourceVO;
+import com.bluetop.upms.api.vo.UserResourceVO;
+import com.bluetop.upms.api.vo.UserVO;
+import com.bluetop.upms.biz.cons.PermissionType;
 import com.bluetop.upms.biz.core.exception.AuthException;
 import com.bluetop.upms.biz.database.entity.Application;
 import com.bluetop.upms.biz.database.entity.Resource;
@@ -36,7 +39,9 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <授权服务>
@@ -70,7 +75,7 @@ public class AuthController implements AuthServiceFacade {
      * @param authTokenParms
      * @return
      */
-    @PostMapping(value = "/token")
+    @PostMapping(value = "/auth/token")
     @ApiOperation(value = "获取token")
     public R<String> getToken(@RequestBody AuthTokenParams authTokenParms) {
         if (Objects.isNull(authTokenParms)
@@ -111,7 +116,7 @@ public class AuthController implements AuthServiceFacade {
      * @param judgePerMissionParams
      * @return
      */
-    @PostMapping(value = "/judge/permission")
+    @PostMapping(value = "/auth/judge/permission")
     @ApiOperation(value = "判断当前用户是否有权限")
     @ApiImplicitParams({
             @ApiImplicitParam(name = Constans.JWT_CUSTOMER_TOKEN_NAME, value = "认证token", required = true, dataType = "string", paramType = "header")
@@ -134,29 +139,82 @@ public class AuthController implements AuthServiceFacade {
      * @param token
      * @return
      */
-    @GetMapping(value = "/list/permission")
+    @GetMapping(value = "/auth/list/permission")
     @ApiOperation(value = "获取权限列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = Constans.JWT_CUSTOMER_TOKEN_NAME, value = "认证token", required = true, dataType = "string", paramType = "header")
     })
     @RequiresAuthentication
-    public R<List<ResourceVO>> listPermission(@RequestHeader("Authorization") String token) {
+    public R<UserResourceVO> listPermission(@RequestHeader("Authorization") String token) {
+        if (!SecurityUtils.getSubject().isAuthenticated()) {
+            log.error("[{}] request params invalid. params : {}", getClass().getSimpleName(), token);
+            throw new AuthException("Params invalid!", 504);
+        }
+        R<UserResourceVO> result = new R<>();
+        String username = JWTUtils.getUsername(token);
+        Wrapper condition = Wrappers.<User>query().lambda().eq(User::getUsername, username);
+        User user = userMapper.selectOne(condition);
+        if (Objects.isNull(user)) {
+            log.error("[{}] user not exist. username : {}", getClass().getSimpleName(), username);
+            throw new AuthException("Params invalid!", 504);
+        }
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+        List<Resource> resourceList = resourceMapper.getAllResourceByUser(user.getId());
+        UserResourceVO userResourceVO = new UserResourceVO();
+        userResourceVO.setUserVO(userVO);
+        if (CollectionUtil.isNotEmpty(resourceList)) {
+            Map<Integer, List<Resource>> resourceGroup = resourceList.stream().collect(Collectors.groupingBy(Resource::getType, Collectors.toList()));
+            List<Resource> systems = resourceGroup.computeIfAbsent(PermissionType.SYSTEM.getCode(), v -> Lists.newArrayList());
+            List<Resource> menus = resourceGroup.computeIfAbsent(PermissionType.MENU.getCode(), v -> Lists.newArrayList());
+            List<Resource> urls = resourceGroup.computeIfAbsent(PermissionType.API.getCode(), v -> Lists.newArrayList());
+            List<ResourceVO> systemVOS = Lists.newArrayListWithCapacity(systems.size());
+            List<ResourceVO> menuVOS = Lists.newArrayListWithCapacity(menus.size());
+            List<ResourceVO> urlVOS = Lists.newArrayListWithCapacity(urls.size());
+            menus.stream().forEach(resource -> {
+                ResourceVO resourceVO = new ResourceVO();
+                BeanUtils.copyProperties(resource, resourceVO);
+                menuVOS.add(resourceVO);
+            });
+            systems.stream().forEach(resource -> {
+                ResourceVO resourceVO = new ResourceVO();
+                BeanUtils.copyProperties(resource, resourceVO);
+                systemVOS.add(resourceVO);
+            });
+            urls.stream().forEach(resource -> {
+                ResourceVO resourceVO = new ResourceVO();
+                BeanUtils.copyProperties(resource, resourceVO);
+                urlVOS.add(resourceVO);
+            });
+            userResourceVO.setSystems(systemVOS);
+            userResourceVO.setMenu(menuVOS);
+            userResourceVO.setPermission(urlVOS);
+        }
+        result.setData(userResourceVO);
+        return result;
+    }
+
+    /**
+     * 获取用户系统列表
+     *
+     * @param token
+     * @return
+     */
+    @GetMapping(value = "/auth/systems")
+    @ApiOperation(value = "获取系统列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = Constans.JWT_CUSTOMER_TOKEN_NAME, value = "认证token", required = true, dataType = "string", paramType = "header")
+    })
+    @RequiresAuthentication
+    public R<List<ResourceVO>> listSystems(@RequestHeader("Authorization") String token) {
         if (!SecurityUtils.getSubject().isAuthenticated()) {
             log.error("[{}] request params invalid. params : {}", getClass().getSimpleName(), token);
             throw new AuthException("Params invalid!", 504);
         }
         R<List<ResourceVO>> result = new R<>();
-        String applicationKey = JWTUtils.getApplicationKey(token);
         String username = JWTUtils.getUsername(token);
-        Wrapper condition = Wrappers.<User>query().lambda().eq(User::getUsername, username);
-        User user = userMapper.selectOne(condition);
-        List<Resource> resourceList = null;
-        Application application = applicationMapper.selectOne(Wrappers.<Application>query().lambda().eq(Application::getApplicationKey, applicationKey));
-        if (SecurityUtils.getSubject().hasRole(Constans.SUPER_ADMIN_ROLE)) {
-            resourceList = resourceMapper.getResourcesByAppKey(applicationKey);
-        } else {
-            resourceList = resourceMapper.getResourcesByUserAndAppKey(user.getId(), applicationKey);
-        }
+        User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, username));
+        List<Resource> resourceList = resourceMapper.getResourceByUser(user.getId(), PermissionType.SYSTEM.getCode());
         if (CollectionUtil.isNotEmpty(resourceList)) {
             List<ResourceVO> resourceVOS = Lists.newArrayListWithCapacity(resourceList.size());
             resourceList.stream().forEach(resource -> {
@@ -174,7 +232,7 @@ public class AuthController implements AuthServiceFacade {
      *
      * @return
      */
-    @GetMapping(value = "/401")
+    @GetMapping(value = "/auth/401")
     @ApiIgnore
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public R<String> unauthorized() {

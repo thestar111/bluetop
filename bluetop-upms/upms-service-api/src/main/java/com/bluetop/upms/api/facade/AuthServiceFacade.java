@@ -12,13 +12,11 @@ package com.bluetop.upms.api.facade;
 import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.auth.AuthTokenParams;
 import com.bluetop.upms.api.dto.auth.JudgePerMissionParams;
-import com.bluetop.upms.api.vo.ResourceVO;
+import com.bluetop.upms.api.vo.UserResourceVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-
-import java.util.List;
 
 /**
  * <授权服务接口API>
@@ -56,7 +54,7 @@ public interface AuthServiceFacade {
      * @return
      */
     @GetMapping(value = "/upms-service/api/list/permission")
-    R<List<ResourceVO>> listPermission(@RequestHeader("Authorization") String token);
+    R<UserResourceVO> listPermission(@RequestHeader("Authorization") String token);
 
     /**
      * 未授权

@@ -29,6 +29,22 @@ public interface ResourceMapper extends BaseMapper<Resource> {
     List<Resource> getResourcesByUserAndAppKey(@Param("userId") Integer userId, @Param("applicationKey") String applicationKey);
 
     /**
+     * 获取当前用户获取的项目列表信息
+     *
+     * @param userId         用户id
+     * @return
+     */
+    List<Resource> getResourceByUser(@Param("userId") Integer userId, @Param("type") Integer type);
+
+    /**
+     * 获取当前用户获取的项目列表信息
+     *
+     * @param userId         用户id
+     * @return
+     */
+    List<Resource> getAllResourceByUser(@Param("userId") Integer userId);
+
+    /**
      * 获取当前项目所有资源
      *
      * @param applicationKey

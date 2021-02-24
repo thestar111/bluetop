@@ -2,18 +2,18 @@ package com.bluetop.upms.biz.provider.role;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.bluetop.framework.core.cons.Constans;
+import com.bluetop.framework.core.utils.JWTUtils;
 import com.bluetop.framework.core.vo.R;
 import com.bluetop.upms.api.dto.role.JudgeRoleParams;
 import com.bluetop.upms.api.facade.RoleServiceFacade;
 import com.bluetop.upms.api.vo.JudgeRole;
 import com.bluetop.upms.api.vo.RoleVO;
-import com.bluetop.upms.biz.cons.Config;
 import com.bluetop.upms.biz.core.exception.AuthException;
 import com.bluetop.upms.biz.database.entity.Role;
 import com.bluetop.upms.biz.database.entity.User;
 import com.bluetop.upms.biz.database.mapper.RoleMapper;
 import com.bluetop.upms.biz.database.mapper.UserMapper;
-import com.bluetop.upms.biz.utils.JWTUtil;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,8 +68,8 @@ public class RoleController implements RoleServiceFacade {
         if (isAllowed) {
             throw new AuthException("Token invalid!", 119);
         }
-        String userName = JWTUtil.getUsername(token);
-        String applicationKey = JWTUtil.getApplicationKey(token);
+        String userName = JWTUtils.getUsername(token);
+        String applicationKey = JWTUtils.getApplicationKey(token);
         User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         if (CollectionUtil.isNotEmpty(roles)) {
@@ -102,11 +102,11 @@ public class RoleController implements RoleServiceFacade {
         if (!isAllowed) {
             throw new AuthException("Token invalid!", 119);
         }
-        String userName = JWTUtil.getUsername(token);
-        String applicationKey = JWTUtil.getApplicationKey(token);
+        String userName = JWTUtils.getUsername(token);
+        String applicationKey = JWTUtils.getApplicationKey(token);
         User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
-        result.setData(roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE));
+        result.setData(roleService.hasRole(roles, Constans.SUPER_ADMIN_ROLE));
         return result;
     }
 
@@ -131,8 +131,8 @@ public class RoleController implements RoleServiceFacade {
             throw new AuthException("Token invalid!", 119);
         }
         String roleKey = judgeRoleParams.getRoleKey();
-        String userName = JWTUtil.getUsername(token);
-        String applicationKey = JWTUtil.getApplicationKey(token);
+        String userName = JWTUtils.getUsername(token);
+        String applicationKey = JWTUtils.getApplicationKey(token);
         User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, userName));
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         JudgeRole judgeRole = new JudgeRole();

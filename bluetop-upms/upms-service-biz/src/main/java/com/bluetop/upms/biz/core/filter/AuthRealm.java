@@ -1,6 +1,8 @@
 package com.bluetop.upms.biz.core.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.bluetop.framework.core.cons.Constans;
+import com.bluetop.framework.core.utils.JWTUtils;
 import com.bluetop.upms.biz.cons.Config;
 import com.bluetop.upms.biz.core.token.Token;
 import com.bluetop.upms.biz.database.entity.Application;
@@ -12,7 +14,6 @@ import com.bluetop.upms.biz.database.mapper.ResourceMapper;
 import com.bluetop.upms.biz.database.mapper.RoleMapper;
 import com.bluetop.upms.biz.database.mapper.UserMapper;
 import com.bluetop.upms.biz.provider.role.RoleService;
-import com.bluetop.upms.biz.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -73,8 +74,8 @@ public class AuthRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String token = principals.toString();
-        String username = JWTUtil.getUsername(token);
-        String applicationKey = JWTUtil.getApplicationKey(token);
+        String username = JWTUtils.getUsername(token);
+        String applicationKey = JWTUtils.getApplicationKey(token);
         User user = userMapper.selectOne(Wrappers.<User>query().lambda().eq(User::getUsername, username));
         if (user == null) {
             throw new AuthenticationException("User doesn't exist!");
@@ -82,7 +83,7 @@ public class AuthRealm extends AuthorizingRealm {
         List<Role> roles = roleMapper.getRolesByUserAndAppKey(user.getId(), applicationKey);
         List<Resource> resources = null;
         Application application = applicationMapper.selectOne(Wrappers.<Application>query().lambda().eq(Application::getApplicationKey, applicationKey));
-        if (roleService.hasRole(roles, Config.SUPER_ADMIN_ROLE)) {
+        if (roleService.hasRole(roles, Constans.SUPER_ADMIN_ROLE)) {
             resources = resourceMapper.getResourcesByAppKey(applicationKey);
         } else {
             resources = resourceMapper.getResourcesByUserAndAppKey(user.getId(), applicationKey);
@@ -101,8 +102,8 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
         // 解密获得username，用于和数据库进行对比
-        String username = JWTUtil.getUsername(token);
-        String applicationKey = JWTUtil.getApplicationKey(token);
+        String username = JWTUtils.getUsername(token);
+        String applicationKey = JWTUtils.getApplicationKey(token);
         if (StringUtils.isBlank(username) || StringUtils.isBlank(applicationKey)) {
             throw new AuthenticationException("Token is invalid!");
         }
@@ -115,7 +116,7 @@ public class AuthRealm extends AuthorizingRealm {
             throw new AuthenticationException("Application " + applicationKey + " doesn't exist!");
         }
         try {
-            JWTUtil.verify(token, username, user.getSecret());
+            JWTUtils.verify(token, username, user.getSecret());
         } catch (Exception e) {
             log.error("[AuthRealm] invoke doGetAuthenticationInfo occur an unknown error, {}", ExceptionUtils.getRootCauseMessage(e));
             throw new AuthenticationException("Token is invalid!");
