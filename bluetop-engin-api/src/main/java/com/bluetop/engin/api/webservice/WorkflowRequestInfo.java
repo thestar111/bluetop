@@ -1,10 +1,9 @@
 
 package com.bluetop.engin.api.webservice;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -97,64 +96,64 @@ public class WorkflowRequestInfo {
 
     protected Boolean canEdit;
     protected Boolean canView;
-    @XmlElementRef(name = "createTime", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> createTime;
-    @XmlElementRef(name = "creatorId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> creatorId;
-    @XmlElementRef(name = "creatorName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> creatorName;
-    @XmlElementRef(name = "currentNodeId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> currentNodeId;
-    @XmlElementRef(name = "currentNodeName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> currentNodeName;
-    @XmlElementRef(name = "forwardButtonName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> forwardButtonName;
-    @XmlElementRef(name = "isnextflow", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> isnextflow;
-    @XmlElementRef(name = "lastOperateTime", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> lastOperateTime;
-    @XmlElementRef(name = "lastOperatorName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> lastOperatorName;
-    @XmlElementRef(name = "messageType", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> messageType;
+    @XmlElement(nillable = true)
+    protected String createTime;
+    @XmlElement(nillable = true)
+    protected String creatorId;
+    @XmlElement(nillable = true)
+    protected String creatorName;
+    @XmlElement(nillable = true)
+    protected String currentNodeId;
+    @XmlElement(nillable = true)
+    protected String currentNodeName;
+    @XmlElement(nillable = true)
+    protected String forwardButtonName;
+    @XmlElement(nillable = true)
+    protected String isnextflow;
+    @XmlElement(nillable = true)
+    protected String lastOperateTime;
+    @XmlElement(nillable = true)
+    protected String lastOperatorName;
+    @XmlElement(nillable = true)
+    protected String messageType;
     protected Boolean mustInputRemark;
     protected Boolean needAffirmance;
-    @XmlElementRef(name = "receiveTime", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> receiveTime;
-    @XmlElementRef(name = "rejectButtonName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> rejectButtonName;
-    @XmlElementRef(name = "remark", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> remark;
-    @XmlElementRef(name = "requestId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> requestId;
-    @XmlElementRef(name = "requestLevel", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> requestLevel;
-    @XmlElementRef(name = "requestName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> requestName;
-    @XmlElementRef(name = "secLevel", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> secLevel;
-    @XmlElementRef(name = "status", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> status;
-    @XmlElementRef(name = "subbackButtonName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> subbackButtonName;
-    @XmlElementRef(name = "submitButtonName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> submitButtonName;
-    @XmlElementRef(name = "subnobackButtonName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> subnobackButtonName;
-    @XmlElementRef(name = "workflowBaseInfo", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<WorkflowBaseInfo> workflowBaseInfo;
-    @XmlElementRef(name = "workflowDetailTableInfos", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfWorkflowDetailTableInfo> workflowDetailTableInfos;
-    @XmlElementRef(name = "workflowHtmlShow", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfString> workflowHtmlShow;
-    @XmlElementRef(name = "workflowHtmlTemplete", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfString> workflowHtmlTemplete;
-    @XmlElementRef(name = "workflowMainTableInfo", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<WorkflowMainTableInfo> workflowMainTableInfo;
-    @XmlElementRef(name = "workflowPhrases", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfArrayOfString> workflowPhrases;
-    @XmlElementRef(name = "workflowRequestLogs", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfWorkflowRequestLog> workflowRequestLogs;
+    @XmlElement(nillable = true)
+    protected String receiveTime;
+    @XmlElement(nillable = true)
+    protected String rejectButtonName;
+    @XmlElement(nillable = true)
+    protected String remark;
+    @XmlElement(nillable = true)
+    protected String requestId;
+    @XmlElement(nillable = true)
+    protected String requestLevel;
+    @XmlElement(nillable = true)
+    protected String requestName;
+    @XmlElement(nillable = true)
+    protected String secLevel;
+    @XmlElement(nillable = true)
+    protected String status;
+    @XmlElement(nillable = true)
+    protected String subbackButtonName;
+    @XmlElement(nillable = true)
+    protected String submitButtonName;
+    @XmlElement(nillable = true)
+    protected String subnobackButtonName;
+    @XmlElement(nillable = true)
+    protected WorkflowBaseInfo workflowBaseInfo;
+    @XmlElement(nillable = true)
+    protected ArrayOfWorkflowDetailTableInfo workflowDetailTableInfos;
+    @XmlElement(nillable = true)
+    protected ArrayOfString workflowHtmlShow;
+    @XmlElement(nillable = true)
+    protected ArrayOfString workflowHtmlTemplete;
+    @XmlElement(nillable = true)
+    protected WorkflowMainTableInfo workflowMainTableInfo;
+    @XmlElement(nillable = true)
+    protected ArrayOfArrayOfString workflowPhrases;
+    @XmlElement(nillable = true)
+    protected ArrayOfWorkflowRequestLog workflowRequestLogs;
 
     /**
      * 获取canEdit属性的值。
@@ -209,10 +208,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
@@ -221,10 +220,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setCreateTime(JAXBElement<String> value) {
+    public void setCreateTime(String value) {
         this.createTime = value;
     }
 
@@ -233,10 +232,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getCreatorId() {
+    public String getCreatorId() {
         return creatorId;
     }
 
@@ -245,10 +244,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setCreatorId(JAXBElement<String> value) {
+    public void setCreatorId(String value) {
         this.creatorId = value;
     }
 
@@ -257,10 +256,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getCreatorName() {
+    public String getCreatorName() {
         return creatorName;
     }
 
@@ -269,10 +268,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setCreatorName(JAXBElement<String> value) {
+    public void setCreatorName(String value) {
         this.creatorName = value;
     }
 
@@ -281,10 +280,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getCurrentNodeId() {
+    public String getCurrentNodeId() {
         return currentNodeId;
     }
 
@@ -293,10 +292,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setCurrentNodeId(JAXBElement<String> value) {
+    public void setCurrentNodeId(String value) {
         this.currentNodeId = value;
     }
 
@@ -305,10 +304,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getCurrentNodeName() {
+    public String getCurrentNodeName() {
         return currentNodeName;
     }
 
@@ -317,10 +316,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setCurrentNodeName(JAXBElement<String> value) {
+    public void setCurrentNodeName(String value) {
         this.currentNodeName = value;
     }
 
@@ -329,10 +328,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getForwardButtonName() {
+    public String getForwardButtonName() {
         return forwardButtonName;
     }
 
@@ -341,10 +340,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setForwardButtonName(JAXBElement<String> value) {
+    public void setForwardButtonName(String value) {
         this.forwardButtonName = value;
     }
 
@@ -353,10 +352,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getIsnextflow() {
+    public String getIsnextflow() {
         return isnextflow;
     }
 
@@ -365,10 +364,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setIsnextflow(JAXBElement<String> value) {
+    public void setIsnextflow(String value) {
         this.isnextflow = value;
     }
 
@@ -377,10 +376,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getLastOperateTime() {
+    public String getLastOperateTime() {
         return lastOperateTime;
     }
 
@@ -389,10 +388,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setLastOperateTime(JAXBElement<String> value) {
+    public void setLastOperateTime(String value) {
         this.lastOperateTime = value;
     }
 
@@ -401,10 +400,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getLastOperatorName() {
+    public String getLastOperatorName() {
         return lastOperatorName;
     }
 
@@ -413,10 +412,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setLastOperatorName(JAXBElement<String> value) {
+    public void setLastOperatorName(String value) {
         this.lastOperatorName = value;
     }
 
@@ -425,10 +424,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getMessageType() {
+    public String getMessageType() {
         return messageType;
     }
 
@@ -437,10 +436,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setMessageType(JAXBElement<String> value) {
+    public void setMessageType(String value) {
         this.messageType = value;
     }
 
@@ -497,10 +496,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getReceiveTime() {
+    public String getReceiveTime() {
         return receiveTime;
     }
 
@@ -509,10 +508,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setReceiveTime(JAXBElement<String> value) {
+    public void setReceiveTime(String value) {
         this.receiveTime = value;
     }
 
@@ -521,10 +520,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRejectButtonName() {
+    public String getRejectButtonName() {
         return rejectButtonName;
     }
 
@@ -533,10 +532,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRejectButtonName(JAXBElement<String> value) {
+    public void setRejectButtonName(String value) {
         this.rejectButtonName = value;
     }
 
@@ -545,10 +544,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRemark() {
+    public String getRemark() {
         return remark;
     }
 
@@ -557,10 +556,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRemark(JAXBElement<String> value) {
+    public void setRemark(String value) {
         this.remark = value;
     }
 
@@ -569,10 +568,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRequestId() {
+    public String getRequestId() {
         return requestId;
     }
 
@@ -581,10 +580,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRequestId(JAXBElement<String> value) {
+    public void setRequestId(String value) {
         this.requestId = value;
     }
 
@@ -593,10 +592,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRequestLevel() {
+    public String getRequestLevel() {
         return requestLevel;
     }
 
@@ -605,10 +604,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRequestLevel(JAXBElement<String> value) {
+    public void setRequestLevel(String value) {
         this.requestLevel = value;
     }
 
@@ -617,10 +616,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRequestName() {
+    public String getRequestName() {
         return requestName;
     }
 
@@ -629,10 +628,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRequestName(JAXBElement<String> value) {
+    public void setRequestName(String value) {
         this.requestName = value;
     }
 
@@ -641,10 +640,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getSecLevel() {
+    public String getSecLevel() {
         return secLevel;
     }
 
@@ -653,10 +652,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setSecLevel(JAXBElement<String> value) {
+    public void setSecLevel(String value) {
         this.secLevel = value;
     }
 
@@ -665,10 +664,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -677,10 +676,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setStatus(JAXBElement<String> value) {
+    public void setStatus(String value) {
         this.status = value;
     }
 
@@ -689,10 +688,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getSubbackButtonName() {
+    public String getSubbackButtonName() {
         return subbackButtonName;
     }
 
@@ -701,10 +700,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setSubbackButtonName(JAXBElement<String> value) {
+    public void setSubbackButtonName(String value) {
         this.subbackButtonName = value;
     }
 
@@ -713,10 +712,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getSubmitButtonName() {
+    public String getSubmitButtonName() {
         return submitButtonName;
     }
 
@@ -725,10 +724,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setSubmitButtonName(JAXBElement<String> value) {
+    public void setSubmitButtonName(String value) {
         this.submitButtonName = value;
     }
 
@@ -737,10 +736,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getSubnobackButtonName() {
+    public String getSubnobackButtonName() {
         return subnobackButtonName;
     }
 
@@ -749,10 +748,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setSubnobackButtonName(JAXBElement<String> value) {
+    public void setSubnobackButtonName(String value) {
         this.subnobackButtonName = value;
     }
 
@@ -761,10 +760,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link WorkflowBaseInfo }{@code >}
+     *     {@link WorkflowBaseInfo }
      *     
      */
-    public JAXBElement<WorkflowBaseInfo> getWorkflowBaseInfo() {
+    public WorkflowBaseInfo getWorkflowBaseInfo() {
         return workflowBaseInfo;
     }
 
@@ -773,10 +772,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link WorkflowBaseInfo }{@code >}
+     *     {@link WorkflowBaseInfo }
      *     
      */
-    public void setWorkflowBaseInfo(JAXBElement<WorkflowBaseInfo> value) {
+    public void setWorkflowBaseInfo(WorkflowBaseInfo value) {
         this.workflowBaseInfo = value;
     }
 
@@ -785,10 +784,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowDetailTableInfo }{@code >}
+     *     {@link ArrayOfWorkflowDetailTableInfo }
      *     
      */
-    public JAXBElement<ArrayOfWorkflowDetailTableInfo> getWorkflowDetailTableInfos() {
+    public ArrayOfWorkflowDetailTableInfo getWorkflowDetailTableInfos() {
         return workflowDetailTableInfos;
     }
 
@@ -797,10 +796,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowDetailTableInfo }{@code >}
+     *     {@link ArrayOfWorkflowDetailTableInfo }
      *     
      */
-    public void setWorkflowDetailTableInfos(JAXBElement<ArrayOfWorkflowDetailTableInfo> value) {
+    public void setWorkflowDetailTableInfos(ArrayOfWorkflowDetailTableInfo value) {
         this.workflowDetailTableInfos = value;
     }
 
@@ -809,10 +808,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public JAXBElement<ArrayOfString> getWorkflowHtmlShow() {
+    public ArrayOfString getWorkflowHtmlShow() {
         return workflowHtmlShow;
     }
 
@@ -821,10 +820,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public void setWorkflowHtmlShow(JAXBElement<ArrayOfString> value) {
+    public void setWorkflowHtmlShow(ArrayOfString value) {
         this.workflowHtmlShow = value;
     }
 
@@ -833,10 +832,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public JAXBElement<ArrayOfString> getWorkflowHtmlTemplete() {
+    public ArrayOfString getWorkflowHtmlTemplete() {
         return workflowHtmlTemplete;
     }
 
@@ -845,10 +844,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public void setWorkflowHtmlTemplete(JAXBElement<ArrayOfString> value) {
+    public void setWorkflowHtmlTemplete(ArrayOfString value) {
         this.workflowHtmlTemplete = value;
     }
 
@@ -857,10 +856,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link WorkflowMainTableInfo }{@code >}
+     *     {@link WorkflowMainTableInfo }
      *     
      */
-    public JAXBElement<WorkflowMainTableInfo> getWorkflowMainTableInfo() {
+    public WorkflowMainTableInfo getWorkflowMainTableInfo() {
         return workflowMainTableInfo;
     }
 
@@ -869,10 +868,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link WorkflowMainTableInfo }{@code >}
+     *     {@link WorkflowMainTableInfo }
      *     
      */
-    public void setWorkflowMainTableInfo(JAXBElement<WorkflowMainTableInfo> value) {
+    public void setWorkflowMainTableInfo(WorkflowMainTableInfo value) {
         this.workflowMainTableInfo = value;
     }
 
@@ -881,10 +880,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfArrayOfString }{@code >}
+     *     {@link ArrayOfArrayOfString }
      *     
      */
-    public JAXBElement<ArrayOfArrayOfString> getWorkflowPhrases() {
+    public ArrayOfArrayOfString getWorkflowPhrases() {
         return workflowPhrases;
     }
 
@@ -893,10 +892,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfArrayOfString }{@code >}
+     *     {@link ArrayOfArrayOfString }
      *     
      */
-    public void setWorkflowPhrases(JAXBElement<ArrayOfArrayOfString> value) {
+    public void setWorkflowPhrases(ArrayOfArrayOfString value) {
         this.workflowPhrases = value;
     }
 
@@ -905,10 +904,10 @@ public class WorkflowRequestInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowRequestLog }{@code >}
+     *     {@link ArrayOfWorkflowRequestLog }
      *     
      */
-    public JAXBElement<ArrayOfWorkflowRequestLog> getWorkflowRequestLogs() {
+    public ArrayOfWorkflowRequestLog getWorkflowRequestLogs() {
         return workflowRequestLogs;
     }
 
@@ -917,10 +916,10 @@ public class WorkflowRequestInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowRequestLog }{@code >}
+     *     {@link ArrayOfWorkflowRequestLog }
      *     
      */
-    public void setWorkflowRequestLogs(JAXBElement<ArrayOfWorkflowRequestLog> value) {
+    public void setWorkflowRequestLogs(ArrayOfWorkflowRequestLog value) {
         this.workflowRequestLogs = value;
     }
 

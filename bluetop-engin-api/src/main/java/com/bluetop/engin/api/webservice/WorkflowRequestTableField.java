@@ -1,10 +1,9 @@
 
 package com.bluetop.engin.api.webservice;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -65,35 +64,35 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class WorkflowRequestTableField {
 
-    @XmlElementRef(name = "browserurl", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> browserurl;
+    @XmlElement(nillable = true)
+    protected String browserurl;
     protected Boolean edit;
-    @XmlElementRef(name = "fieldDBType", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldDBType;
-    @XmlElementRef(name = "fieldFormName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldFormName;
-    @XmlElementRef(name = "fieldHtmlType", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldHtmlType;
-    @XmlElementRef(name = "fieldId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldId;
-    @XmlElementRef(name = "fieldName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldName;
+    @XmlElement(nillable = true)
+    protected String fieldDBType;
+    @XmlElement(nillable = true)
+    protected String fieldFormName;
+    @XmlElement(nillable = true)
+    protected String fieldHtmlType;
+    @XmlElement(nillable = true)
+    protected String fieldId;
+    @XmlElement(nillable = true)
+    protected String fieldName;
     protected Integer fieldOrder;
-    @XmlElementRef(name = "fieldShowName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldShowName;
-    @XmlElementRef(name = "fieldShowValue", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldShowValue;
-    @XmlElementRef(name = "fieldType", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldType;
-    @XmlElementRef(name = "fieldValue", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> fieldValue;
-    @XmlElementRef(name = "filedHtmlShow", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> filedHtmlShow;
+    @XmlElement(nillable = true)
+    protected String fieldShowName;
+    @XmlElement(nillable = true)
+    protected String fieldShowValue;
+    @XmlElement(nillable = true)
+    protected String fieldType;
+    @XmlElement(nillable = true)
+    protected String fieldValue;
+    @XmlElement(nillable = true)
+    protected String filedHtmlShow;
     protected Boolean mand;
-    @XmlElementRef(name = "selectnames", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfString> selectnames;
-    @XmlElementRef(name = "selectvalues", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfString> selectvalues;
+    @XmlElement(nillable = true)
+    protected ArrayOfString selectnames;
+    @XmlElement(nillable = true)
+    protected ArrayOfString selectvalues;
     protected Boolean view;
 
     /**
@@ -101,10 +100,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getBrowserurl() {
+    public String getBrowserurl() {
         return browserurl;
     }
 
@@ -113,10 +112,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setBrowserurl(JAXBElement<String> value) {
+    public void setBrowserurl(String value) {
         this.browserurl = value;
     }
 
@@ -149,10 +148,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldDBType() {
+    public String getFieldDBType() {
         return fieldDBType;
     }
 
@@ -161,10 +160,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldDBType(JAXBElement<String> value) {
+    public void setFieldDBType(String value) {
         this.fieldDBType = value;
     }
 
@@ -173,10 +172,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldFormName() {
+    public String getFieldFormName() {
         return fieldFormName;
     }
 
@@ -185,10 +184,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldFormName(JAXBElement<String> value) {
+    public void setFieldFormName(String value) {
         this.fieldFormName = value;
     }
 
@@ -197,10 +196,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldHtmlType() {
+    public String getFieldHtmlType() {
         return fieldHtmlType;
     }
 
@@ -209,10 +208,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldHtmlType(JAXBElement<String> value) {
+    public void setFieldHtmlType(String value) {
         this.fieldHtmlType = value;
     }
 
@@ -221,10 +220,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldId() {
+    public String getFieldId() {
         return fieldId;
     }
 
@@ -233,10 +232,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldId(JAXBElement<String> value) {
+    public void setFieldId(String value) {
         this.fieldId = value;
     }
 
@@ -245,10 +244,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldName() {
+    public String getFieldName() {
         return fieldName;
     }
 
@@ -257,10 +256,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldName(JAXBElement<String> value) {
+    public void setFieldName(String value) {
         this.fieldName = value;
     }
 
@@ -293,10 +292,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldShowName() {
+    public String getFieldShowName() {
         return fieldShowName;
     }
 
@@ -305,10 +304,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldShowName(JAXBElement<String> value) {
+    public void setFieldShowName(String value) {
         this.fieldShowName = value;
     }
 
@@ -317,10 +316,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldShowValue() {
+    public String getFieldShowValue() {
         return fieldShowValue;
     }
 
@@ -329,10 +328,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldShowValue(JAXBElement<String> value) {
+    public void setFieldShowValue(String value) {
         this.fieldShowValue = value;
     }
 
@@ -341,10 +340,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldType() {
+    public String getFieldType() {
         return fieldType;
     }
 
@@ -353,10 +352,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldType(JAXBElement<String> value) {
+    public void setFieldType(String value) {
         this.fieldType = value;
     }
 
@@ -365,10 +364,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFieldValue() {
+    public String getFieldValue() {
         return fieldValue;
     }
 
@@ -377,10 +376,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFieldValue(JAXBElement<String> value) {
+    public void setFieldValue(String value) {
         this.fieldValue = value;
     }
 
@@ -389,10 +388,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getFiledHtmlShow() {
+    public String getFiledHtmlShow() {
         return filedHtmlShow;
     }
 
@@ -401,10 +400,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setFiledHtmlShow(JAXBElement<String> value) {
+    public void setFiledHtmlShow(String value) {
         this.filedHtmlShow = value;
     }
 
@@ -437,10 +436,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public JAXBElement<ArrayOfString> getSelectnames() {
+    public ArrayOfString getSelectnames() {
         return selectnames;
     }
 
@@ -449,10 +448,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public void setSelectnames(JAXBElement<ArrayOfString> value) {
+    public void setSelectnames(ArrayOfString value) {
         this.selectnames = value;
     }
 
@@ -461,10 +460,10 @@ public class WorkflowRequestTableField {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public JAXBElement<ArrayOfString> getSelectvalues() {
+    public ArrayOfString getSelectvalues() {
         return selectvalues;
     }
 
@@ -473,10 +472,10 @@ public class WorkflowRequestTableField {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfString }{@code >}
+     *     {@link ArrayOfString }
      *     
      */
-    public void setSelectvalues(JAXBElement<ArrayOfString> value) {
+    public void setSelectvalues(ArrayOfString value) {
         this.selectvalues = value;
     }
 

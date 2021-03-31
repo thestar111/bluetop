@@ -1,10 +1,9 @@
 
 package com.bluetop.engin.api.webservice;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -67,52 +66,52 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class WorkflowRequestLog {
 
-    @XmlElementRef(name = "agentor", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> agentor;
-    @XmlElementRef(name = "agentorDept", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> agentorDept;
-    @XmlElementRef(name = "annexDocHtmls", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> annexDocHtmls;
-    @XmlElementRef(name = "id", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> id;
-    @XmlElementRef(name = "nodeId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> nodeId;
-    @XmlElementRef(name = "nodeName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> nodeName;
-    @XmlElementRef(name = "operateDate", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operateDate;
-    @XmlElementRef(name = "operateTime", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operateTime;
-    @XmlElementRef(name = "operateType", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operateType;
-    @XmlElementRef(name = "operatorDept", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operatorDept;
-    @XmlElementRef(name = "operatorId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operatorId;
-    @XmlElementRef(name = "operatorName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operatorName;
-    @XmlElementRef(name = "operatorSign", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> operatorSign;
-    @XmlElementRef(name = "receivedPersons", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> receivedPersons;
-    @XmlElementRef(name = "remark", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> remark;
-    @XmlElementRef(name = "remarkSign", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> remarkSign;
-    @XmlElementRef(name = "signDocHtmls", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> signDocHtmls;
-    @XmlElementRef(name = "signWorkFlowHtmls", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> signWorkFlowHtmls;
+    @XmlElement(nillable = true)
+    protected String agentor;
+    @XmlElement(nillable = true)
+    protected String agentorDept;
+    @XmlElement(nillable = true)
+    protected String annexDocHtmls;
+    @XmlElement(nillable = true)
+    protected String id;
+    @XmlElement(nillable = true)
+    protected String nodeId;
+    @XmlElement(nillable = true)
+    protected String nodeName;
+    @XmlElement(nillable = true)
+    protected String operateDate;
+    @XmlElement(nillable = true)
+    protected String operateTime;
+    @XmlElement(nillable = true)
+    protected String operateType;
+    @XmlElement(nillable = true)
+    protected String operatorDept;
+    @XmlElement(nillable = true)
+    protected String operatorId;
+    @XmlElement(nillable = true)
+    protected String operatorName;
+    @XmlElement(nillable = true)
+    protected String operatorSign;
+    @XmlElement(nillable = true)
+    protected String receivedPersons;
+    @XmlElement(nillable = true)
+    protected String remark;
+    @XmlElement(nillable = true)
+    protected String remarkSign;
+    @XmlElement(nillable = true)
+    protected String signDocHtmls;
+    @XmlElement(nillable = true)
+    protected String signWorkFlowHtmls;
 
     /**
      * 获取agentor属性的值。
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getAgentor() {
+    public String getAgentor() {
         return agentor;
     }
 
@@ -121,10 +120,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setAgentor(JAXBElement<String> value) {
+    public void setAgentor(String value) {
         this.agentor = value;
     }
 
@@ -133,10 +132,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getAgentorDept() {
+    public String getAgentorDept() {
         return agentorDept;
     }
 
@@ -145,10 +144,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setAgentorDept(JAXBElement<String> value) {
+    public void setAgentorDept(String value) {
         this.agentorDept = value;
     }
 
@@ -157,10 +156,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getAnnexDocHtmls() {
+    public String getAnnexDocHtmls() {
         return annexDocHtmls;
     }
 
@@ -169,10 +168,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setAnnexDocHtmls(JAXBElement<String> value) {
+    public void setAnnexDocHtmls(String value) {
         this.annexDocHtmls = value;
     }
 
@@ -181,10 +180,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getId() {
+    public String getId() {
         return id;
     }
 
@@ -193,10 +192,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setId(JAXBElement<String> value) {
+    public void setId(String value) {
         this.id = value;
     }
 
@@ -205,10 +204,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getNodeId() {
+    public String getNodeId() {
         return nodeId;
     }
 
@@ -217,10 +216,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setNodeId(JAXBElement<String> value) {
+    public void setNodeId(String value) {
         this.nodeId = value;
     }
 
@@ -229,10 +228,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getNodeName() {
+    public String getNodeName() {
         return nodeName;
     }
 
@@ -241,10 +240,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setNodeName(JAXBElement<String> value) {
+    public void setNodeName(String value) {
         this.nodeName = value;
     }
 
@@ -253,10 +252,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperateDate() {
+    public String getOperateDate() {
         return operateDate;
     }
 
@@ -265,10 +264,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperateDate(JAXBElement<String> value) {
+    public void setOperateDate(String value) {
         this.operateDate = value;
     }
 
@@ -277,10 +276,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperateTime() {
+    public String getOperateTime() {
         return operateTime;
     }
 
@@ -289,10 +288,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperateTime(JAXBElement<String> value) {
+    public void setOperateTime(String value) {
         this.operateTime = value;
     }
 
@@ -301,10 +300,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperateType() {
+    public String getOperateType() {
         return operateType;
     }
 
@@ -313,10 +312,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperateType(JAXBElement<String> value) {
+    public void setOperateType(String value) {
         this.operateType = value;
     }
 
@@ -325,10 +324,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperatorDept() {
+    public String getOperatorDept() {
         return operatorDept;
     }
 
@@ -337,10 +336,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperatorDept(JAXBElement<String> value) {
+    public void setOperatorDept(String value) {
         this.operatorDept = value;
     }
 
@@ -349,10 +348,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperatorId() {
+    public String getOperatorId() {
         return operatorId;
     }
 
@@ -361,10 +360,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperatorId(JAXBElement<String> value) {
+    public void setOperatorId(String value) {
         this.operatorId = value;
     }
 
@@ -373,10 +372,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperatorName() {
+    public String getOperatorName() {
         return operatorName;
     }
 
@@ -385,10 +384,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperatorName(JAXBElement<String> value) {
+    public void setOperatorName(String value) {
         this.operatorName = value;
     }
 
@@ -397,10 +396,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOperatorSign() {
+    public String getOperatorSign() {
         return operatorSign;
     }
 
@@ -409,10 +408,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOperatorSign(JAXBElement<String> value) {
+    public void setOperatorSign(String value) {
         this.operatorSign = value;
     }
 
@@ -421,10 +420,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getReceivedPersons() {
+    public String getReceivedPersons() {
         return receivedPersons;
     }
 
@@ -433,10 +432,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setReceivedPersons(JAXBElement<String> value) {
+    public void setReceivedPersons(String value) {
         this.receivedPersons = value;
     }
 
@@ -445,10 +444,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRemark() {
+    public String getRemark() {
         return remark;
     }
 
@@ -457,10 +456,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRemark(JAXBElement<String> value) {
+    public void setRemark(String value) {
         this.remark = value;
     }
 
@@ -469,10 +468,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRemarkSign() {
+    public String getRemarkSign() {
         return remarkSign;
     }
 
@@ -481,10 +480,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRemarkSign(JAXBElement<String> value) {
+    public void setRemarkSign(String value) {
         this.remarkSign = value;
     }
 
@@ -493,10 +492,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getSignDocHtmls() {
+    public String getSignDocHtmls() {
         return signDocHtmls;
     }
 
@@ -505,10 +504,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setSignDocHtmls(JAXBElement<String> value) {
+    public void setSignDocHtmls(String value) {
         this.signDocHtmls = value;
     }
 
@@ -517,10 +516,10 @@ public class WorkflowRequestLog {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getSignWorkFlowHtmls() {
+    public String getSignWorkFlowHtmls() {
         return signWorkFlowHtmls;
     }
 
@@ -529,10 +528,10 @@ public class WorkflowRequestLog {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setSignWorkFlowHtmls(JAXBElement<String> value) {
+    public void setSignWorkFlowHtmls(String value) {
         this.signWorkFlowHtmls = value;
     }
 

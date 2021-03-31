@@ -1,10 +1,9 @@
 
 package com.bluetop.engin.api.webservice;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -35,20 +34,20 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class WorkflowMainTableInfo {
 
-    @XmlElementRef(name = "requestRecords", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfWorkflowRequestTableRecord> requestRecords;
-    @XmlElementRef(name = "tableDBName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> tableDBName;
+    @XmlElement(nillable = true)
+    protected ArrayOfWorkflowRequestTableRecord requestRecords;
+    @XmlElement(nillable = true)
+    protected String tableDBName;
 
     /**
      * 获取requestRecords属性的值。
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowRequestTableRecord }{@code >}
+     *     {@link ArrayOfWorkflowRequestTableRecord }
      *     
      */
-    public JAXBElement<ArrayOfWorkflowRequestTableRecord> getRequestRecords() {
+    public ArrayOfWorkflowRequestTableRecord getRequestRecords() {
         return requestRecords;
     }
 
@@ -57,10 +56,10 @@ public class WorkflowMainTableInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowRequestTableRecord }{@code >}
+     *     {@link ArrayOfWorkflowRequestTableRecord }
      *     
      */
-    public void setRequestRecords(JAXBElement<ArrayOfWorkflowRequestTableRecord> value) {
+    public void setRequestRecords(ArrayOfWorkflowRequestTableRecord value) {
         this.requestRecords = value;
     }
 
@@ -69,10 +68,10 @@ public class WorkflowMainTableInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getTableDBName() {
+    public String getTableDBName() {
         return tableDBName;
     }
 
@@ -81,10 +80,10 @@ public class WorkflowMainTableInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setTableDBName(JAXBElement<String> value) {
+    public void setTableDBName(String value) {
         this.tableDBName = value;
     }
 

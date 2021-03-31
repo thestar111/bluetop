@@ -1,10 +1,9 @@
 
 package com.bluetop.engin.api.webservice;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -36,8 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 public class WorkflowRequestTableRecord {
 
     protected Integer recordOrder;
-    @XmlElementRef(name = "workflowRequestTableFields", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfWorkflowRequestTableField> workflowRequestTableFields;
+    @XmlElement(nillable = true)
+    protected ArrayOfWorkflowRequestTableField workflowRequestTableFields;
 
     /**
      * 获取recordOrder属性的值。
@@ -68,10 +67,10 @@ public class WorkflowRequestTableRecord {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowRequestTableField }{@code >}
+     *     {@link ArrayOfWorkflowRequestTableField }
      *     
      */
-    public JAXBElement<ArrayOfWorkflowRequestTableField> getWorkflowRequestTableFields() {
+    public ArrayOfWorkflowRequestTableField getWorkflowRequestTableFields() {
         return workflowRequestTableFields;
     }
 
@@ -80,10 +79,10 @@ public class WorkflowRequestTableRecord {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfWorkflowRequestTableField }{@code >}
+     *     {@link ArrayOfWorkflowRequestTableField }
      *     
      */
-    public void setWorkflowRequestTableFields(JAXBElement<ArrayOfWorkflowRequestTableField> value) {
+    public void setWorkflowRequestTableFields(ArrayOfWorkflowRequestTableField value) {
         this.workflowRequestTableFields = value;
     }
 

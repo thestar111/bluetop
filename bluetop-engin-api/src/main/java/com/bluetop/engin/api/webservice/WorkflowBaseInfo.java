@@ -1,10 +1,9 @@
 
 package com.bluetop.engin.api.webservice;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -39,24 +38,24 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class WorkflowBaseInfo {
 
-    @XmlElementRef(name = "workflowId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> workflowId;
-    @XmlElementRef(name = "workflowName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> workflowName;
-    @XmlElementRef(name = "workflowTypeId", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> workflowTypeId;
-    @XmlElementRef(name = "workflowTypeName", namespace = "http://webservices.workflow.weaver", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> workflowTypeName;
+    @XmlElement(nillable = true)
+    protected String workflowId;
+    @XmlElement(nillable = true)
+    protected String workflowName;
+    @XmlElement(nillable = true)
+    protected String workflowTypeId;
+    @XmlElement(nillable = true)
+    protected String workflowTypeName;
 
     /**
      * 获取workflowId属性的值。
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getWorkflowId() {
+    public String getWorkflowId() {
         return workflowId;
     }
 
@@ -65,10 +64,10 @@ public class WorkflowBaseInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setWorkflowId(JAXBElement<String> value) {
+    public void setWorkflowId(String value) {
         this.workflowId = value;
     }
 
@@ -77,10 +76,10 @@ public class WorkflowBaseInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getWorkflowName() {
+    public String getWorkflowName() {
         return workflowName;
     }
 
@@ -89,10 +88,10 @@ public class WorkflowBaseInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setWorkflowName(JAXBElement<String> value) {
+    public void setWorkflowName(String value) {
         this.workflowName = value;
     }
 
@@ -101,10 +100,10 @@ public class WorkflowBaseInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getWorkflowTypeId() {
+    public String getWorkflowTypeId() {
         return workflowTypeId;
     }
 
@@ -113,10 +112,10 @@ public class WorkflowBaseInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setWorkflowTypeId(JAXBElement<String> value) {
+    public void setWorkflowTypeId(String value) {
         this.workflowTypeId = value;
     }
 
@@ -125,10 +124,10 @@ public class WorkflowBaseInfo {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getWorkflowTypeName() {
+    public String getWorkflowTypeName() {
         return workflowTypeName;
     }
 
@@ -137,10 +136,10 @@ public class WorkflowBaseInfo {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setWorkflowTypeName(JAXBElement<String> value) {
+    public void setWorkflowTypeName(String value) {
         this.workflowTypeName = value;
     }
 
