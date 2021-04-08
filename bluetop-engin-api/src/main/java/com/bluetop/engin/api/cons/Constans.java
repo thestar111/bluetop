@@ -49,4 +49,13 @@ public interface Constans {
      * 超级管理员角色key
      */
     String SUPER_ADMIN_ROLE = "admin";
+
+    /**
+     * 常用配置
+     */
+    public interface ConfigKey {
+
+        /** WSDL地址 */
+        String WSDL_URL_KEY = "WSDL";
+    }
 }

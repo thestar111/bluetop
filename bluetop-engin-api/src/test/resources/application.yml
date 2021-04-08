@@ -1,0 +1,45 @@
+server:
+  port: 7071
+spring:
+  application:
+    name: engine-service
+  datasource:
+    h2:
+      jdbc-url: jdbc:h2:~/una_db;INIT=RUNSCRIPT FROM 'classpath:sql/t_workflow_log.sql'
+      username: sa
+      password:
+      name: una_db
+      driver-class-name: org.h2.Driver
+    mysql:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/una_db?useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=UTC
+      username: root
+      password: zhouping
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 50
+      idle-timeout: 30000
+      max-lifetime: 1200000
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+# mybatis 配置
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.bluetop.engin.api.bean
+  configuration:
+    # 开启驼峰转换功能
+    map-underscore-to-camel-case: true
+    # 打印sql, 方便调试
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    use-generated-keys: true
+    default-statement-timeout: 60
+    default-fetch-size: 100
+## 流程配置文件
+workflow:
+  file: classpath:workflow.json
+## wsdl地址
+wsdl:
+  url: http://180.167.215.157:30182/services/WorkflowService?wsdl

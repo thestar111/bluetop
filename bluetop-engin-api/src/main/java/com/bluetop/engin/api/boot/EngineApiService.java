@@ -10,9 +10,11 @@
 package com.bluetop.engin.api.boot;
 
 import com.bluetop.engin.api.chain.RequestLogChainFilter;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,8 +28,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @ComponentScan(basePackages = "com.bluetop.engin.api")
+@MapperScan(basePackages = "com.bluetop.engin.api.dao")
 public class EngineApiService {
 
     @Value("${spring.application.name:}")

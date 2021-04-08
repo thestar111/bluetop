@@ -9,13 +9,14 @@
  */
 package com.bluetop.engin.api.api;
 
+import com.bluetop.engin.api.bean.WorkflowLog;
+import com.bluetop.engin.api.model.Result;
+import com.bluetop.engin.api.param.CreateWorkflowRequest;
 import com.bluetop.engin.api.service.WebClientService;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <一句话功能简述>
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @see [相关类/方法]
  * @since JDK 1.8
  */
+@Api(tags = "流程管理")
 @Slf4j
 @RestController
 public class WorkflowApi {
@@ -36,21 +38,36 @@ public class WorkflowApi {
     /**
      * 创建流程
      *
-     * @param flowId
-     * @param userId
+     * @param createWorkflowRequest
      * @return
      */
+    @ApiOperation(value = "创建流程", notes = "创建流程")
     @PostMapping(value = "/create/flow")
-    public String createWorkflow(@RequestParam("flowId") String flowId, @RequestParam("userId") String userId) {
-        return webClientService.sendWsdlWebService(flowId, userId);
+    public Result<String> createWorkflow(@RequestBody CreateWorkflowRequest createWorkflowRequest) {
+        String reqId = webClientService.createWorkflow(createWorkflowRequest);
+        Result<String> result = new Result<>();
+        result.setCode(0);
+        result.setMsg("SUCCESS");
+        result.setData(reqId);
+        return result;
     }
 
     /**
      * 获取流程信息
      *
      */
+    @ApiOperation(value = "获取流程")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="requestId",value="流程请求ID",required=true, paramType="QueryString"),
+            @ApiImplicitParam(name="userId",value="用户ID",required=true, paramType="QueryString")
+    })
     @GetMapping(value = "flow/info")
-    public void getFlow() {
-        webClientService.getWorkflowInfo();
+    public Result<WorkflowLog> getFlow(@RequestParam("requestId") Integer requestId, @RequestParam("userId") Integer userId) {
+        WorkflowLog workflowLog = webClientService.getWorkflowInfo(requestId, userId);
+        Result<WorkflowLog> result = new Result<>();
+        result.setCode(0);
+        result.setMsg("SUCCESS");
+        result.setData(workflowLog);
+        return result;
     }
 }

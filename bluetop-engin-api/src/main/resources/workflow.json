@@ -1,0 +1,16 @@
+[{
+  "workflowId" : "74",
+  "workflowName" : "退宿单审批"
+},{
+  "workflowId" : "75",
+  "workflowName" : "客户信息新增/修改"
+},{
+  "workflowId" : "76",
+  "workflowName" : "合同模板审批"
+},{
+  "workflowId" : "77",
+  "workflowName" : "归档审批"
+},{
+  "workflowId" : "84",
+  "workflowName" : "包房包床-合同及订单审批"
+}]

@@ -34,37 +34,33 @@ import static com.bluetop.engin.api.context.RequestHeader.X_REQUEST_ID;
  * @since [产品/模块版本]
  */
 @Slf4j
-public class RequestLogChainFilter implements Filter
-{
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger (RequestLogChainFilter.class);
+public class RequestLogChainFilter implements Filter {
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException
-	{
-		LOGGER.debug ("【RequestLogChainFilter】 Logger Chain init ...");
-	}
-	
-	@Override
-	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException
-	{
-		HttpServletRequest request = (HttpServletRequest) servletRequest;
-		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String traceID = request.getHeader (X_REQUEST_ID.getName());
-		String source = request.getHeader (X_REQUEST_FROM.getName());
-		ThreadContext.put (TRANCE_ID, traceID);
-		RequestContext context = RequestContext.get();
-		context.setReqId(traceID);
-		context.setReqSource(source);
-		RequestContext.set(context);
-		filterChain.doFilter (request, response);
-		ThreadContext.clearAll ();
-		RequestContext.clear();
-	}
-	
-	@Override
-	public void destroy()
-	{
-		LOGGER.debug ("【RequestLogChainFilter】 Logger Chain destroy ...");
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestLogChainFilter.class);
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        LOGGER.debug("【RequestLogChainFilter】 Logger Chain init ...");
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String traceID = request.getHeader(X_REQUEST_ID.getName());
+        String source = request.getHeader(X_REQUEST_FROM.getName());
+        ThreadContext.put(TRANCE_ID, traceID);
+        RequestContext context = RequestContext.get();
+        context.setReqId(traceID);
+        context.setReqSource(source);
+        RequestContext.set(context);
+        filterChain.doFilter(request, response);
+        ThreadContext.clearAll();
+        RequestContext.clear();
+    }
+
+    @Override
+    public void destroy() {
+        LOGGER.debug("【RequestLogChainFilter】 Logger Chain destroy ...");
+    }
 }

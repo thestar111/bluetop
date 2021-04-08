@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bluetop.engin.api.dao.WorkflowLogDao">
+
+    <insert id="addLog" parameterType="com.bluetop.engin.api.bean.WorkflowLog">
+        insert into t_workflow_log(request_id, user_id, workflow_id, workflow_name, status, machine, retry_time, retry_max_time)
+        values(#{requestId}, #{userId}, #{workflowId}, #{workflowName}, #{status}, #{machine}, #{retryTime}, #{retryMaxTime})
+    </insert>
+
+    <!-- 获取所有已归档流程 -->
+    <select id="list" resultType="WorkflowLog">
+        select * from t_workflow_log where status = 'COMPLETE'
+    </select>
+
+    <!--分页获取流程信息-->
+    <select id="listById" resultType="WorkflowLog">
+        select * from t_workflow_log where status = 'NEW' and id &gt; #{id} order by id ASC limit 200
+    </select>
+
+    <update id="modifyWorkflow">
+        update t_workflow_log set status = #{status} where request_id = #{requestId}
+    </update>
+
+    <select id="getWorkflow" resultType="WorkflowLog">
+        select * from t_workflow_log where request_id = #{requestId} and user_id= #{userId}
+    </select>
+</mapper>
