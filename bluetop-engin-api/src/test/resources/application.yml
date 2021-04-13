@@ -43,3 +43,5 @@ workflow:
 ## wsdl地址
 wsdl:
   url: http://180.167.215.157:30182/services/WorkflowService?wsdl
+machine:
+  number: 1

@@ -2,6 +2,9 @@ package com.bluetop;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.json.JSONUtil;
+import com.bluetop.engin.api.boot.EngineApiService;
+import com.bluetop.engin.api.client.WorkflowCallbackClient;
+import com.bluetop.engin.api.client.request.CallbackRequest;
 import com.bluetop.engin.api.model.NameAndValue;
 import com.bluetop.engin.api.model.TableDetailInfo;
 import com.bluetop.engin.api.param.CreateWorkflowRequest;
@@ -9,6 +12,10 @@ import com.bluetop.engin.api.webservice.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +24,24 @@ import java.util.Objects;
 /**
  * Unit test for simple App.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = EngineApiService.class)
 public class AppTest {
+
+    @Autowired
+    private WorkflowCallbackClient workflowCallbackClient;
+
+    @Test
+    public void t () {
+        CallbackRequest request = new CallbackRequest();
+        request.setFlow_record_id(100002);
+        request.setTimestamp("10999999999");
+        request.setApprove_status(1);
+        request.buildSign("c7bccb45453a9d22");
+        request.setWorkflow_id(75);
+        Map map = workflowCallbackClient.callback(request);
+        System.out.println(JSONUtil.toJsonStr(map));
+    }
 
     /**
      * Rigorous Test :-)

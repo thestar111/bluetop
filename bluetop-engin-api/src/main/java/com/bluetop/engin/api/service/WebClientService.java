@@ -13,6 +13,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.json.JSONUtil;
 import com.bluetop.engin.api.bean.Workflow;
 import com.bluetop.engin.api.bean.WorkflowLog;
+import com.bluetop.engin.api.client.WorkflowCallbackClient;
+import com.bluetop.engin.api.client.request.CallbackRequest;
 import com.bluetop.engin.api.config.CommonCacheBean;
 import com.bluetop.engin.api.cons.Constans;
 import com.bluetop.engin.api.cons.WorkflowStatus;
@@ -28,10 +30,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.callback.Callback;
 import javax.xml.namespace.QName;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -53,8 +57,14 @@ public class WebClientService {
     @Autowired
     private WorkflowLogDao workflowLogDao;
 
-    @Value("${machine.number:}")
+    @Autowired
+    private WorkflowCallbackClient workflowCallbackClient;
+
+    @Value("${machine.number:1}")
     private String machine;
+
+    @Value("${key:c7bccb45453a9d22}")
+    private String key;
 
     /**
      * 创建流程
@@ -154,6 +164,8 @@ public class WebClientService {
      * 创建明细表
      *
      * @param objFac
+     * @param fields
+     * @return
      */
     private WorkflowDetailTableInfo createDetailTableInfo(ObjectFactory objFac, List<List<NameAndValue>> fields) {
         WorkflowDetailTableInfo workflowDetailTableInfo = new WorkflowDetailTableInfo();
@@ -225,6 +237,8 @@ public class WebClientService {
      */
     public void syncWorkflowInfo(int requestId, int userId) {
         URL url;
+        CallbackRequest request = null;
+        Map<String, Object> map = null;
         try {
             url = new URL(commonCacheBean.getConfig(Constans.ConfigKey.WSDL_URL_KEY));
             //Qnameqname是qualified name 的简写
@@ -240,10 +254,28 @@ public class WebClientService {
                 case "归档" :
                     log.info("【{}】 workflow request_id : {} had complete.", getClass().getSimpleName(), requestId);
                     workflowLogDao.modifyWorkflow(String.valueOf(requestId), WorkflowStatus.COMPLETE.name());
+                    request = new CallbackRequest();
+                    request.setApprove_status(0);
+                    request.setTimestamp(System.currentTimeMillis() + "");
+                    request.setFlow_record_id(requestId);
+                    request.setFlow_form(JSONUtil.toJsonStr(workflowRequestInfo));
+                    request.setWorkflow_id(Integer.valueOf(workflowRequestInfo.getWorkflowBaseInfo().getWorkflowId()));
+                    request.buildSign(key);
+                    map = workflowCallbackClient.callback(request);
+                    log.info("[{}] callback return result : {}", getClass().getSimpleName(), JSONUtil.toJsonStr(map));
                     break;
                 case "制单人" :
                     log.info("【{}】 workflow request_id : {} had complete.", getClass().getSimpleName(), requestId);
                     workflowLogDao.modifyWorkflow(String.valueOf(requestId), WorkflowStatus.REJECT.name());
+                    request = new CallbackRequest();
+                    request.setApprove_status(1);
+                    request.setTimestamp(System.currentTimeMillis() + "");
+                    request.setFlow_record_id(requestId);
+                    request.setFlow_form(JSONUtil.toJsonStr(workflowRequestInfo));
+                    request.setWorkflow_id(Integer.valueOf(workflowRequestInfo.getWorkflowBaseInfo().getWorkflowId()));
+                    request.buildSign(key);
+                    map = workflowCallbackClient.callback(request);
+                    log.info("[{}] callback return result : {}", getClass().getSimpleName(), JSONUtil.toJsonStr(map));
                     break;
                 default:
                     break;
