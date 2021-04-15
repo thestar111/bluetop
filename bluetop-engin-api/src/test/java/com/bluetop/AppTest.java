@@ -2,9 +2,6 @@ package com.bluetop;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.json.JSONUtil;
-import com.bluetop.engin.api.boot.EngineApiService;
-import com.bluetop.engin.api.client.WorkflowCallbackClient;
-import com.bluetop.engin.api.client.request.CallbackRequest;
 import com.bluetop.engin.api.model.NameAndValue;
 import com.bluetop.engin.api.model.TableDetailInfo;
 import com.bluetop.engin.api.param.CreateWorkflowRequest;
@@ -12,10 +9,6 @@ import com.bluetop.engin.api.webservice.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 import java.util.Map;
@@ -24,24 +17,7 @@ import java.util.Objects;
 /**
  * Unit test for simple App.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = EngineApiService.class)
 public class AppTest {
-
-    @Autowired
-    private WorkflowCallbackClient workflowCallbackClient;
-
-    @Test
-    public void t () {
-        CallbackRequest request = new CallbackRequest();
-        request.setFlow_record_id(100002);
-        request.setTimestamp("10999999999");
-        request.setApprove_status(1);
-        request.buildSign("c7bccb45453a9d22");
-        request.setWorkflow_id(75);
-        Map map = workflowCallbackClient.callback(request);
-        System.out.println(JSONUtil.toJsonStr(map));
-    }
 
     /**
      * Rigorous Test :-)
@@ -345,6 +321,106 @@ public class AppTest {
         main.add(new NameAndValue("bz", "备注"));
         main.add(new NameAndValue("bzfj", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069542074,3354686813&fm=26&gp=0.jpg", "0.jpg"));
         main.add(new NameAndValue("fbzfj", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069542074,3354686813&fm=26&gp=0.jpg", "0.jpg"));
+        createWorkflowRequest.setWorkflowMainTables(main);
+
+        List<TableDetailInfo> tableDetailInfos = Lists.newArrayList();
+        TableDetailInfo t3 = new TableDetailInfo();
+        t3.setOrder(3);
+        List<List<NameAndValue>> d3 = Lists.newArrayList();
+        List<NameAndValue> dt1 = Lists.newArrayList();
+        dt1.add(new NameAndValue("md", "五一广场"));
+        dt1.add(new NameAndValue("km", "1"));
+        dt1.add(new NameAndValue("je", "3000"));
+        dt1.add(new NameAndValue("zq", "202104"));
+        dt1.add(new NameAndValue("zwzfr", "2021-05-01"));
+        d3.add(dt1);
+        t3.setTableInfos(d3);
+        tableDetailInfos.add(t3);
+
+        TableDetailInfo t2 = new TableDetailInfo();
+        t2.setOrder(2);
+        List<List<NameAndValue>> d2 = Lists.newArrayList();
+        List<NameAndValue> r1 = Lists.newArrayList();
+        r1.add(new NameAndValue("md", "德思勤"));
+        r1.add(new NameAndValue("yfryyj", "500"));
+        r1.add(new NameAndValue("df", "500"));
+        r1.add(new NameAndValue("lsf", "700"));
+        r1.add(new NameAndValue("rsf", "500"));
+        r1.add(new NameAndValue("wf", "200"));
+        r1.add(new NameAndValue("wyf", "100"));
+        r1.add(new NameAndValue("df1", "100"));
+        r1.add(new NameAndValue("df2", "100"));
+        r1.add(new NameAndValue("lsf1", "100"));
+        r1.add(new NameAndValue("lsf2", "100"));
+        r1.add(new NameAndValue("rsf1", "100"));
+        r1.add(new NameAndValue("rsf2", "100"));
+        r1.add(new NameAndValue("wf1", "100"));
+        r1.add(new NameAndValue("wf2", "100"));
+        r1.add(new NameAndValue("wyf1", "100"));
+        r1.add(new NameAndValue("wyf2", "100"));
+        d2.add(r1);
+        t2.setTableInfos(d2);
+        tableDetailInfos.add(t2);
+
+        TableDetailInfo t1 = new TableDetailInfo();
+        t1.setOrder(1);
+        List<List<NameAndValue>> d1 = Lists.newArrayList();
+        List<NameAndValue> r01 = Lists.newArrayList();
+        r01.add(new NameAndValue("md", "喜盈门"));
+        r01.add(new NameAndValue("bfbc", "包房"));
+        r01.add(new NameAndValue("fx", "三室一厅"));
+        r01.add(new NameAndValue("sl", "5"));
+        r01.add(new NameAndValue("xsdj", "100"));
+        r01.add(new NameAndValue("dj", "100"));
+        r01.add(new NameAndValue("yze", "10000"));
+        r01.add(new NameAndValue("sftpdj", "否"));
+        r01.add(new NameAndValue("cwdj", "50"));
+        d1.add(r01);
+        t1.setTableInfos(d1);
+        tableDetailInfos.add(t1);
+
+        createWorkflowRequest.setWorkflowDetailTables(tableDetailInfos);
+
+        System.out.println(JSONUtil.toJsonStr(createWorkflowRequest));
+    }
+
+    /**
+     * 战略合作-订单审批
+     */
+    @Test
+    public void requestOrderReview2() {
+        CreateWorkflowRequest createWorkflowRequest = new CreateWorkflowRequest();
+        createWorkflowRequest.setWorkflowId("86");
+        createWorkflowRequest.setUserId("162");
+        List<NameAndValue> main = Lists.newArrayList();
+        main.add(new NameAndValue("htbh", "HT10000009"));
+        main.add(new NameAndValue("htmc", "MC测试合同"));
+        main.add(new NameAndValue("yjje", "300"));
+        main.add(new NameAndValue("htqx", "30天"));
+        main.add(new NameAndValue("ddqx", "2021-04-07"));
+        main.add(new NameAndValue("htjf", "北京蓝拓有限公司"));
+        main.add(new NameAndValue("yf", "乙方"));
+        main.add(new NameAndValue("khmc", "湖南蓝佑"));
+        main.add(new NameAndValue("ppmc", "安歆公寓"));
+        main.add(new NameAndValue("bzfj", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069542074,3354686813&fm=26&gp=0.jpg", "0.jpg"));
+        main.add(new NameAndValue("fbzfj", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2069542074,3354686813&fm=26&gp=0.jpg", "0.jpg"));
+        main.add(new NameAndValue("htlx", "普通合同"));
+        main.add(new NameAndValue("bgsxrq", "2021-04-03"));
+        main.add(new NameAndValue("ddqykhmc", "安歆"));
+        main.add(new NameAndValue("tsrq", "Y202104030000000"));
+        main.add(new NameAndValue("ddbh", "D202104030000000"));
+        main.add(new NameAndValue("xsry", "周平"));
+        main.add(new NameAndValue("jffs", "按天"));
+        main.add(new NameAndValue("jszq", "30天"));
+        main.add(new NameAndValue("skrq", "2021-04-09"));
+        main.add(new NameAndValue("yjzflx", "支付宝"));
+        main.add(new NameAndValue("kplx", "普票"));
+        main.add(new NameAndValue("kptt", "北京蓝拓股份有限公司"));
+        main.add(new NameAndValue("kpfs", "电子"));
+        main.add(new NameAndValue("kpnr", "办公用品"));
+        main.add(new NameAndValue("bzhtfbht", "标准"));
+        main.add(new NameAndValue("ydsj", "赢单商机"));
+        main.add(new NameAndValue("bz", "备注"));
         createWorkflowRequest.setWorkflowMainTables(main);
 
         List<TableDetailInfo> tableDetailInfos = Lists.newArrayList();

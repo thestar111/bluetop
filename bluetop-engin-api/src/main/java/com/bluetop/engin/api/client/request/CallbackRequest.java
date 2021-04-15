@@ -55,7 +55,7 @@ public class CallbackRequest implements Serializable {
         obj.put("timestamp", this.getTimestamp());
         String text = obj.entrySet().stream().map(e -> e.getKey() + "=" + e.getValue())
                 .collect(Collectors.joining("&"));
-        this.setSign(md5.digestHex(text + "&key=" + key).substring(3, 24).toUpperCase());
+        this.setSign(md5.digestHex(text + "&key=" + key).substring(3, 27).toUpperCase());
     }
 
     public static void main(String[] args) {
