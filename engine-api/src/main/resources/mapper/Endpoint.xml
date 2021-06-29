@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bluetop.engine.api.repository.EndpointRepository">
+
+    <resultMap id="endpoint_map" type="com.bluetop.engine.api.bean.Endpoint">
+        <id column="ept_id" property="eptId"/>
+        <result column="name" property="name"/>
+        <result column="application_id" property="applicationId"/>
+        <result column="application_name" property="applicationName"/>
+        <result column="uri" property="uri"/>
+        <result column="method" property="method"/>
+        <result column="header" property="header" jdbcType="VARCHAR" javaType="java.util.Map" typeHandler="com.bluetop.engine.api.core.JsonTypeHandler"/>
+    </resultMap>
+
+    <sql id="BASIC_COL">
+        ept_id, name, application_id, application_name, uri, method, header, remark
+    </sql>
+
+    <insert id="addEndpoint" parameterType="Endpoint">
+        replace into t_endpoint(<include refid="BASIC_COL"/>)
+        values (#{eptId}, #{name}, #{applicationId}, #{applicationName}, #{uri}, #{status}, #{method}, #{header}, #{remark})
+    </insert>
+
+    <update id="enableEndpoint">
+        update t_endpoint set status = "enable" where id = #{eptId} and status = "disable"
+    </update>
+
+    <update id="disableEndpoint">
+        update t_endpoint set status = "disable" where id = #{eptId} and status = "enable"
+    </update>
+
+    <select id="listEndpoint" resultMap="endpoint_map">
+        select <include refid="BASIC_COL"/> from  t_endpoint
+        <where>
+            <if test="status != null and '' != status">
+                status = #{status}
+            </if>
+        </where>
+        limit #{index}, #{size}
+    </select>
+
+    <select id="getById" parameterType="Integer" resultMap="endpoint_map">
+        select * from t_endpoint where ept_id = #{id}
+    </select>
+
+</mapper>

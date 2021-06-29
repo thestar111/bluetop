@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bluetop.engine.api.repository.ApplicationRepository">
+
+    <sql id="BASIC_COL">
+        application_id, application_name, status, url, env, remark
+    </sql>
+
+    <insert id="addApplication" parameterType="Application">
+        replace into t_application(<include refid="BASIC_COL"/>)
+        values (#{applicationId}, #{applicationName}, #{status}, #{url}, #{env}, #{remark})
+    </insert>
+
+    <update id="enableApplication">
+        update t_application set status = "enable" where id = #{applicationId} and status = "disable"
+    </update>
+
+    <update id="disableApplication">
+        update t_application set status = "disable" where id = #{applicationId} and status = "enable"
+    </update>
+
+    <select id="listApplication" resultType="Application">
+        select <include refid="BASIC_COL"/> from t_application
+        <where>
+            <if test="status != null and '' != status">
+                status = #{status}
+            </if>
+        </where>
+        limit #{index}, #{size}
+    </select>
+
+    <select id="getById" parameterType="Integer" resultType="Application">
+        select * from t_application where application_id = #{id}
+    </select>
+
+</mapper>
